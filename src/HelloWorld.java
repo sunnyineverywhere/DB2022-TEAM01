@@ -9,7 +9,7 @@ public class HelloWorld {
     static final String PASS = "DB2022Team01";
 
     public static void main(String[] args) throws SQLException {
-
+    	//jiwon
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
         }catch (ClassNotFoundException e){
