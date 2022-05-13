@@ -14,7 +14,7 @@ create table `DB2022_user`(
 );
 
 create table `DB2022_idol`(
-	`group` varchar(45),
+	`group` varchar(45) primary key,
     `member` varchar(45) primary key,
     `quantity` BIGINT
 );
