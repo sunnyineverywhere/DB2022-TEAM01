@@ -1,4 +1,6 @@
 
+import GUI.DB2022TEAM01_ProductRegister;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -10,7 +12,9 @@ public class HelloWorld {
     static final String PASS = "DB2022Team01";
 
     public static void main(String[] args) throws SQLException {
-    	//jiwon
+
+        /*
+        //jiwon
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
         }catch (ClassNotFoundException e){
@@ -62,6 +66,13 @@ public class HelloWorld {
 		}catch (SQLException e) {
 			// TODO: handle exception
 		}
+
+
+         */
+        
+        
+        // 선의 gui 확인용
+        new DB2022TEAM01_ProductRegister();
 
     }
 
