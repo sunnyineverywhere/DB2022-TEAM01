@@ -3,17 +3,18 @@ package GUI;
 import java.awt.*;
 import javax.swing.*;
 
-public class DB2022TEAM01_LogIn extends JFrame{
-	public DB2022TEAM01_LogIn() {
-		setTitle("로그인");
+public class DB2022TEAM01_SignUp extends JFrame{
+	
+	public DB2022TEAM01_SignUp() {
+		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Container contentPane = getContentPane();
 		contentPane.setBackground(Color.white);
 		contentPane.setLayout(null);
 		
-		//페이지 타이틀 <아이돌 벼룩시장>
-		JLabel title = new JLabel("아이돌 벼룩시장", SwingConstants.CENTER);	
+		//페이지 타이틀 <회원가입>
+		JLabel title = new JLabel("회원가입", SwingConstants.CENTER);	
 		title.setBounds(320, 110, 360, 50);
 		Font font1 = new Font("맑은 고딕", Font.BOLD, 35);
 		title.setFont(font1);		
@@ -40,34 +41,28 @@ public class DB2022TEAM01_LogIn extends JFrame{
 		contentPane.add(pw_field);
 		
 		
-		//로그인, 회원가입 버튼
-		JButton login = new JButton("LogIn");				
+		//회원가입 버튼			
 		JButton signup = new JButton("SignUp");		
 		
 		//버튼 색깔, 폰트
 		Color btn_color=new Color(0xFF6472);
-		login.setBackground(btn_color);
-		login.setForeground(Color.white);
-		login.setFont(font2);
+
 		signup.setBackground(btn_color);		
 		signup.setForeground(Color.white);
 		signup.setFont(font2);
 		
-		login.setBounds(320, 340, 170, 50);
-		signup.setBounds(510, 340, 170, 50);
+		signup.setBounds(415, 340, 170, 50);
 		
-		contentPane.add(login);
 		contentPane.add(signup);
 		
 		setSize(1000, 700);
 		setVisible(true);
 	}
-	
-	
+
 	public static void main(String[] args) {
-		DB2022TEAM01_LogIn logIn = new DB2022TEAM01_LogIn();
-		logIn.setResizable(false);
+		// TODO Auto-generated method stub
+		DB2022TEAM01_SignUp signUp = new DB2022TEAM01_SignUp();
+		signUp.setResizable(false);
 	}
-	
-	
+
 }
