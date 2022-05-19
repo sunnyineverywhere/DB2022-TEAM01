@@ -1,12 +1,12 @@
 package db2022;
 
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class Search {
 	public static void main(String[] args) {
-		// 프레임 생성
+	// 프레임 생성
         JFrame frm = new JFrame("Search");
  
         // 프레임 크기 설정
@@ -28,15 +28,69 @@ public class Search {
         JLabel lb1 = new JLabel("검색");
         lb1.setFont(font);
         
-        // 텍스트 필드 생성
+        // 텍스트 필드 생성 - 커서 들어가면 사라지고 입력 가능
         JTextField tf1 = new JTextField("아이돌 그룹");
+        tf1.setForeground(Color.gray);
+        tf1.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (tf1.getText().equals("아이돌 그룹")) {
+                    tf1.setText("");
+                    tf1.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (tf1.getText().isEmpty()) {
+                    tf1.setForeground(Color.GRAY);
+                    tf1.setText("아이돌 그룹");
+                }
+            }
+            });
+        
+        
         JTextField tf2 = new JTextField("멤버명");
+        tf2.setForeground(Color.gray);
+        tf2.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (tf2.getText().equals("멤버명")) {
+                    tf2.setText("");
+                    tf2.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (tf2.getText().isEmpty()) {
+                    tf2.setForeground(Color.GRAY);
+                    tf2.setText("멤버명");
+                }
+            }
+            });
+        
         JTextField tf3 = new JTextField("검색 키워드");
+        tf3.setForeground(Color.gray);
+        tf3.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (tf3.getText().equals("검색 키워드")) {
+                    tf3.setText("");
+                    tf3.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (tf3.getText().isEmpty()) {
+                    tf3.setForeground(Color.GRAY);
+                    tf3.setText("검색 키워드");
+                }
+            }
+            });
         
         
         // 버튼 생성          
- 	JButton btn1 = new JButton("Home");
- 	JButton btn2 = new JButton("검색하기");
+ 		JButton btn1 = new JButton("Home");
+ 		JButton btn2 = new JButton("검색하기");
  		
 	// 드롭다운 메뉴 생성
 	String[] optionsToChoose = {"굿즈 카테고리", "앨범", "포토카드", "폴라로이드", "응원봉", "시즌 그리팅", "기타"};
@@ -59,14 +113,11 @@ public class Search {
  
         // 붙이기!
         frm.getContentPane().add(lb1);
-		
         frm.getContentPane().add(tf1);
         frm.getContentPane().add(tf2);
         frm.getContentPane().add(tf3);
-		
         frm.getContentPane().add(btn1);
         frm.getContentPane().add(btn2);
-		
         frm.getContentPane().add(jComboBox);
 
 
