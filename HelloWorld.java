@@ -47,6 +47,6 @@ public class HelloWorld {
  
         // 프레임이 보이도록 설정
         frm.setVisible(true);
- 
+
     }
 }
