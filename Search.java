@@ -6,69 +6,72 @@ import javax.swing.*;
 
 public class Search {
 	public static void main(String[] args) {
-		// ÇÁ·¹ÀÓ »ı¼º
+		// í”„ë ˆì„ ìƒì„±
         JFrame frm = new JFrame("Search");
  
-        // ÇÁ·¹ÀÓ Å©±â ¼³Á¤
+        // í”„ë ˆì„ í¬ê¸° ì„¤ì •
         frm.setSize(1000, 700);
  
-        // ÇÁ·¹ÀÓÀ» È­¸é °¡¿îµ¥¿¡ ¹èÄ¡
+        // í”„ë ˆì„ì„ í™”ë©´ ê°€ìš´ë°ì— ë°°ì¹˜
         frm.setLocationRelativeTo(null);
  
-        // ÇÁ·¹ÀÓÀ» ´İ¾ÒÀ» ¶§ ¸Ş¸ğ¸®¿¡¼­ Á¦°ÅµÇµµ·Ï ¼³Á¤
+        // í”„ë ˆì„ì„ ë‹«ì•˜ì„ ë•Œ ë©”ëª¨ë¦¬ì—ì„œ ì œê±°ë˜ë„ë¡ ì„¤ì •
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
-        // ·¹ÀÌ¾Æ¿ô ¼³Á¤
+        // ë ˆì´ì•„ì›ƒ ì„¤ì •
         frm.getContentPane().setLayout(null);
         
-        //ÆùÆ®
-        Font font = new Font("¸¼Àº °íµñ", Font.PLAIN, 50);
+        //í°íŠ¸
+        Font font = new Font("ë§‘ì€ ê³ ë”•", Font.PLAIN, 50);
  
-        // ¶óº§ »ı¼º
-        JLabel lb1 = new JLabel("°Ë»ö");
+        // ë¼ë²¨ ìƒì„±
+        JLabel lb1 = new JLabel("ê²€ìƒ‰");
         lb1.setFont(font);
         
-        // ÅØ½ºÆ® ÇÊµå »ı¼º
-        JTextField tf1 = new JTextField("¾ÆÀÌµ¹ ±×·ì");
-        JTextField tf2 = new JTextField("¸â¹ö¸í");
-        JTextField tf3 = new JTextField("°Ë»ö Å°¿öµå");
+        // í…ìŠ¤íŠ¸ í•„ë“œ ìƒì„±
+        JTextField tf1 = new JTextField("ì•„ì´ëŒ ê·¸ë£¹");
+        JTextField tf2 = new JTextField("ë©¤ë²„ëª…");
+        JTextField tf3 = new JTextField("ê²€ìƒ‰ í‚¤ì›Œë“œ");
         
         
-        // ¹öÆ° »ı¼º          
- 		JButton btn1 = new JButton("Home");
- 		JButton btn2 = new JButton("°Ë»öÇÏ±â");
+        // ë²„íŠ¼ ìƒì„±          
+ 	JButton btn1 = new JButton("Home");
+ 	JButton btn2 = new JButton("ê²€ìƒ‰í•˜ê¸°");
  		
-		// µå·Ó´Ù¿î ¸Ş´º »ı¼º
-		String[] optionsToChoose = {"±ÂÁî Ä«Å×°í¸®", "¾Ù¹ü", "Æ÷ÅäÄ«µå", "Æú¶ó·ÎÀÌµå", "ÀÀ¿øºÀ", "½ÃÁğ ±×¸®ÆÃ", "±âÅ¸"};
+	// ë“œë¡­ë‹¤ìš´ ë©”ë‰´ ìƒì„±
+	String[] optionsToChoose = {"êµ¿ì¦ˆ ì¹´í…Œê³ ë¦¬", "ì•¨ë²”", "í¬í† ì¹´ë“œ", "í´ë¼ë¡œì´ë“œ", "ì‘ì›ë´‰", "ì‹œì¦Œ ê·¸ë¦¬íŒ…", "ê¸°íƒ€"};
         JComboBox<String> jComboBox = new JComboBox<>(optionsToChoose);
 
  
-        // ÄÁÅÙÃ÷ À§Ä¡¿Í Å©±â ¼³Á¤
+        // ì»¨í…ì¸  ìœ„ì¹˜ì™€ í¬ê¸° ì„¤ì •
         lb1.setBounds(454,189,100,61);
         
-		tf1.setBounds(50,300,280,90);
-		tf2.setBounds(360,300,280,90);
-		tf3.setBounds(50,420,590,90);
+	tf1.setBounds(50,300,280,90);
+	tf2.setBounds(360,300,280,90);
+	tf3.setBounds(50,420,590,90);
 		
-		btn1.setBounds(865,30,75,75);
-		btn2.setBounds(670,420,280,90);
+	btn1.setBounds(865,30,75,75);
+	btn2.setBounds(670,420,280,90);
 
         jComboBox.setBounds(670,300,280,90);
 
 
  
-        // ºÙÀÌ±â!
+        // ë¶™ì´ê¸°!
         frm.getContentPane().add(lb1);
+		
         frm.getContentPane().add(tf1);
         frm.getContentPane().add(tf2);
         frm.getContentPane().add(tf3);
+		
         frm.getContentPane().add(btn1);
         frm.getContentPane().add(btn2);
+		
         frm.getContentPane().add(jComboBox);
 
 
  
-        // ÇÁ·¹ÀÓÀÌ º¸ÀÌµµ·Ï ¼³Á¤
+        // í”„ë ˆì„ì´ ë³´ì´ë„ë¡ ì„¤ì •
         frm.setVisible(true);
  
 
