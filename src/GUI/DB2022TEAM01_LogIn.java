@@ -1,7 +1,12 @@
 package GUI;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
+
+import DAO.DB2022TEAM01_UserDAO;
 
 public class DB2022TEAM01_LogIn extends JFrame{
 	public DB2022TEAM01_LogIn() {
@@ -59,14 +64,47 @@ public class DB2022TEAM01_LogIn extends JFrame{
 		contentPane.add(login);
 		contentPane.add(signup);
 		
+		//login 버튼 클릭
+		login.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String id_value = id_field.getText();
+				String pw_value = new String(pw_field.getPassword());
+				DB2022TEAM01_UserDAO user_login = new DB2022TEAM01_UserDAO();
+				if(user_login.login(id_value, pw_value)==1) {	//로그인 성공
+					//임시로
+					JOptionPane.showMessageDialog(DB2022TEAM01_LogIn.this, "로그인 성공!", "Message", JOptionPane.PLAIN_MESSAGE);
+				}
+				else if(user_login.login(id_value, pw_value)==0) {	//비밀번호 틀림
+					JOptionPane.showMessageDialog(DB2022TEAM01_LogIn.this, "비밀번호가 틀렸습니다.", "Message", JOptionPane.ERROR_MESSAGE);
+				}
+				else {	//아이디 없음
+					JOptionPane.showMessageDialog(DB2022TEAM01_LogIn.this, "등록되지 않은 아이디입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		//SignUp 버튼 클릭시 회원가입 페이지로 이동
+		signup.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dispose();
+				new DB2022TEAM01_SignUp();
+			}
+		});
+		
 		setSize(1000, 700);
+		setResizable(false);
 		setVisible(true);
 	}
 	
-	
+		
 	public static void main(String[] args) {
 		DB2022TEAM01_LogIn logIn = new DB2022TEAM01_LogIn();
-		logIn.setResizable(false);
+		
 	}
 	
 	
