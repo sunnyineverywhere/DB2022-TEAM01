@@ -2,6 +2,8 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class DB2022TEAM01_ProductRegister extends JFrame {
     public DB2022TEAM01_ProductRegister(){
@@ -77,6 +79,19 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
         c.add(price);
         c.add(priceInput);
         c.add(categoryInput);
+
+        conform.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String productName = productNameInput.getText();
+                String IdolGroup = IdolGroupInput.getText();
+                String IdolMember = IdolMemberInput.getText();
+                String category = categoryInput.getText();
+                String price_str = priceInput.getText();
+                int price = Integer.parseInt(price_str);
+                System.out.println(productName);
+            }
+        });
 
         setSize(1000, 700);
         setVisible(true);
