@@ -1,7 +1,12 @@
 package GUI;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
+
+import DAO.DB2022TEAM01_UserDAO;
 
 public class DB2022TEAM01_SignUp extends JFrame{
 	
@@ -55,14 +60,30 @@ public class DB2022TEAM01_SignUp extends JFrame{
 		
 		contentPane.add(signup);
 		
+		signup.addActionListener(new ActionListener() {	//signUp button 클릭
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String id_value = id_field.getText();
+				String pw_value = new String(pw_field.getPassword());
+				DB2022TEAM01_UserDAO user_login = new DB2022TEAM01_UserDAO();
+				if(user_login.signUp(id_value, pw_value)) {	//가입 성공 후 로그인 페이지로 이동
+					JOptionPane.showMessageDialog(DB2022TEAM01_SignUp.this, "로그인 페이지로 이동합니다.", "Message", JOptionPane.PLAIN_MESSAGE);
+					dispose();
+					new DB2022TEAM01_LogIn();					
+				}
+				else {	//가입 실패
+					JOptionPane.showMessageDialog(DB2022TEAM01_SignUp.this, "이미 존재하는 ID입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		
 		setSize(1000, 700);
+		setResizable(false);	//창 크기 고정
+		setLocationRelativeTo(null);	//화면 중앙에 뜸
 		setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		DB2022TEAM01_SignUp signUp = new DB2022TEAM01_SignUp();
-		signUp.setResizable(false);
-	}
+	}	
 
 }

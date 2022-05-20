@@ -16,7 +16,9 @@ create table `DB2022_user`(
 );
 
 # 두개 묶어서 primary key -> ?
-# group 변수명때문에 오류 났던 것 같음
+# 두개 묶어서 pk로 쓰면 아래 아이돌 그룹, 아이돌 이름 참조가 안 되어서 아이디 생성
+# 할 줄 아시는 분 도와주시면 감사하겠습니다!
+# group 변수명때문에 오류 났던 것 같음 -> gp로 수정
 create table `DB2022_idol`(
 	`id` bigint not null auto_increment primary key,
 	`gp` varchar(45) not null,
@@ -24,7 +26,7 @@ create table `DB2022_idol`(
     `quantity` BIGINT
 );
 
-# 아이돌에 아이디 주고,,, 저거 굳이...?
+# 아이돌에 아이디
 create table `DB2022_product`(
 	`id` BIGINT not null auto_increment primary key,
     `name` varchar(45),
