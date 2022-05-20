@@ -98,6 +98,7 @@ public class DB2022TEAM01_LogIn extends JFrame{
 		
 		setSize(1000, 700);
 		setResizable(false);
+		setLocationRelativeTo(null);	//화면 중앙에 뜸
 		setVisible(true);
 	}
 	

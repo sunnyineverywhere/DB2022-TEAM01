@@ -82,6 +82,7 @@ public class DB2022TEAM01_SignUp extends JFrame{
 		
 		setSize(1000, 700);
 		setResizable(false);	//창 크기 고정
+		setLocationRelativeTo(null);	//화면 중앙에 뜸
 		setVisible(true);
 	}	
 
