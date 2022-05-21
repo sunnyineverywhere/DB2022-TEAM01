@@ -25,7 +25,15 @@ public class DB2022TEAM01_WishList extends JFrame {
 
         c.add(resTable);
 
-        c.setSize(1000, 700);
-        c.setVisible(true);
+        setSize(1000, 700);
+        //아래 두줄 - 지원
+        setResizable(false);
+		setLocationRelativeTo(null);	//화면 중앙에 뜸
+        setVisible(true);
     }
+    
+    public static void main(String[] args) {
+		DB2022TEAM01_WishList wish = new DB2022TEAM01_WishList();
+		
+	}
 }

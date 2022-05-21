@@ -73,8 +73,8 @@ public class DB2022TEAM01_LogIn extends JFrame{
 				String pw_value = new String(pw_field.getPassword());
 				DB2022TEAM01_UserDAO user_login = new DB2022TEAM01_UserDAO();
 				if(user_login.login(id_value, pw_value)==1) {	//로그인 성공
-					//임시로
-					JOptionPane.showMessageDialog(DB2022TEAM01_LogIn.this, "로그인 성공!", "Message", JOptionPane.PLAIN_MESSAGE);
+					dispose();
+					new DB2022TEAM01_Main();
 				}
 				else if(user_login.login(id_value, pw_value)==0) {	//비밀번호 틀림
 					JOptionPane.showMessageDialog(DB2022TEAM01_LogIn.this, "비밀번호가 틀렸습니다.", "Message", JOptionPane.ERROR_MESSAGE);

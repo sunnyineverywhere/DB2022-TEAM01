@@ -54,17 +54,17 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
         IdolMemberInput.setFont(basic);
         category.setFont(basic);
 
-        JButton conform = new JButton("등록");
-        JButton home = new JButton("home");
-
+        JButton conform = new JButton("등록");	//등록 버튼
+        
         Color buttonColor = new Color(0xFF6472);
 
         conform.setBackground(buttonColor);
         conform.setBounds(400, 500, 200, 100);
         conform.setFont(basic);
         c.add(conform);
-
-        home.setBackground(Color.black);
+        
+        
+        JButton home = DB2022TEAM01_Main.make_home();
         home.setBounds(800, 30, 30, 30);
         c.add(home);
 
@@ -92,8 +92,22 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
                 System.out.println(productName);
             }
         });
+        
+        //홈버튼
+        home.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dispose();
+				new DB2022TEAM01_Main();
+			}
+		});
 
         setSize(1000, 700);
+        setResizable(false);
+        setLocationRelativeTo(null);	//화면 중앙에 뜸
         setVisible(true);
     }
+    
 }
