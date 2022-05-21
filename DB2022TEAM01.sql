@@ -57,7 +57,7 @@ create table `DB2022_trade` (
 );
 
 create table `DB2022_wishlist`(
-    `user_id` varchar(45),
+    `user_id` bigint,
     `product_id` bigint,
     foreign key(user_id) references DB2022_user(id),
     foreign key(product_id) references DB2022_product(id)
