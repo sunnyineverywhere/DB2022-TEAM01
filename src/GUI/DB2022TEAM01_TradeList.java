@@ -1,31 +1,39 @@
-import java.awt.*;
+package GUI;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.sql.*;
 
-public class DB2022TEAM01_TradeList extends JFrame{
+public class DB2022TEAM01_TradeList extends JFrame {
 
-	public DB2022TEAM01_TradeList() {
-		setTitle("¸¶ÀÌÆäÀÌÁö - °Å·¡ ³»¿ª");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		Container cp = getContentPane();
-		cp.setBackground(Color.WHITE);
-		
-		String header[] = {"»óÇ°¸í", "¾ÆÀÌµ¹ ±×·ì", "¸â¹ö¸í", "Ä«Å×°í¸®", "¸ÅµµÀÚ", "°¡°İ"};
-		//db¿¡¼­ ºÒ·¯¿Ã ºÎºĞ
-		String contents[][] = {
-				{"´õº¸ÀÌÁî ÁÖ¿¬ ¾²¸±¶óÀÌµå ¹Ì°øÆ÷ ¾çµµ", "´õº¸ÀÌÁî", "ÁÖ¿¬", "Æ÷Ä«", "dagef", "3500"},
-				{"´õº¸ÀÌÁî ÇöÀç ÀÎÇü ´Ş°õ ÆÇ¸Å", "´õº¸ÀÌÁî", "ÇöÀç", "ÀÎÇü", "dlksjdf", "50000"}
-		};
-		JTable list = new JTable(contents,header);
-		JScrollPane scrollpane = new JScrollPane(list);
-		cp.add(scrollpane);
-		
-		setSize(1000, 700);
-		setVisible(true);
-	}
-	public static void main(String[] args) {
-		DB2022TEAM01_TradeList tradeList = new DB2022TEAM01_TradeList();
+    public DB2022TEAM01_TradeList(){
+        setTitle("ë§ˆì´í˜ì´ì§€ - ê±°ë˜ ë‚´ì—­");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	}
+        Container c = getContentPane();
+        c.setBackground(Color.white);
+
+        JLabel title = new JLabel("ë§ˆì´í˜ì´ì§€ - ê±°ë˜ ë‚´ì—­", SwingConstants.CENTER);
+        title.setBounds(320, 110, 360, 50);
+        Font font1 = new Font("ë§‘ì€ ê³ ë”•", Font.BOLD, 20);
+        title.setFont(font1);
+        c.add(title);
+
+        String header[] = {"ìƒí’ˆëª…", "ì•„ì´ëŒ ê·¸ë£¹", "ë©¤ë²„ëª…", "ì¹´í…Œê³ ë¦¬", "ë§¤ë„ì", "ê°€ê²©"};
+        Object contents[] = new Object[0][6];
+
+        /*
+        DefaultTableModel model = new DefaultTableModel(contents, header);
+        JTable table = new JTable(model);
+        table.setRowHeight(30);
+
+
+         */
+        setSize(1000, 700);
+        setVisible(true);
+
+
+    }
 
 }

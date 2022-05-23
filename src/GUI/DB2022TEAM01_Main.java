@@ -84,6 +84,14 @@ public class DB2022TEAM01_Main extends JFrame{
 				new DB2022TEAM01_ProductDetail();
 			}
 		});
+
+		btn5.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new DB2022TEAM01_TradeList();
+			}
+		});
 		
 		setSize(1000, 700);
 		setResizable(false);

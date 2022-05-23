@@ -1,4 +1,5 @@
 
+import GUI.DB2022TEAM01_Main;
 import GUI.DB2022TEAM01_ProductRegister;
 import GUI.DB2022TEAM01_WishList;
 
@@ -78,11 +79,7 @@ public class HelloWorld {
          */
         
         
-        // 선의 gui 확인용
-       new DB2022TEAM01_ProductRegister();
-
-
-        new DB2022TEAM01_WishList();
+        new DB2022TEAM01_Main();
 
     }
 
