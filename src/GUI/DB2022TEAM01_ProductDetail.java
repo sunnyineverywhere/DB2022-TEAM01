@@ -1,18 +1,21 @@
+package GUI;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
- 
-public class ProductDetail {
- 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("상품 상세"); 
+
+public class DB2022TEAM01_ProductDetail {
+	public DB2022TEAM01_ProductDetail() {
+		JFrame frame = new JFrame("상품 상세"); 
         JPanel panel = new JPanel();
         JLabel label = new JLabel("상품 상세");
         JButton bt1 = new JButton("찜");
         JButton bt2 = new JButton("매수");
         
+        Font font = new Font("맑은 고딕", Font.BOLD, 20);
+        
         label.setHorizontalAlignment(JLabel.CENTER);
-        label.setFont(label.getFont().deriveFont(15.0f));
+        label.setFont(font);
  
         
         String col[] = { "상품명", "아이돌 그룹", "멤버명", "카테고리" , "매도자 ID", "가격", "등록 날짜", "찜", "매수" };   
@@ -42,9 +45,52 @@ public class ProductDetail {
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         frame.setSize(1000, 700);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);	//화면 중앙에 뜸
         frame.setVisible(true); 
- 
-    }
+	}	
+}
+
+class PopUp1 extends JFrame{
+	public PopUp1() {	
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrame frame = new JFrame("찜 완료");
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel("위시리스트에 상품이 추가되었습니다", JLabel.CENTER);
+		
+		label.setHorizontalAlignment(JLabel.CENTER);
+	    label.setFont(label.getFont().deriveFont(15.0f));
+
+	    panel.setLayout(new BorderLayout(10, 10));
+		panel.add(label);
+		frame.add(panel);
+		
+		frame.setSize(300, 150);
+		frame.setLocationRelativeTo(null);	//화면 중앙에 뜸
+		frame.setVisible(true);
+		
+	}
+}
+
+class PopUp2 extends JFrame{
+	public PopUp2() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrame frame = new JFrame("매수 완료");
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel("상품 구입이 완료되었습니다", JLabel.CENTER);
+		
+		label.setHorizontalAlignment(JLabel.CENTER);
+	    label.setFont(label.getFont().deriveFont(15.0f));
+
+	    panel.setLayout(new BorderLayout(10, 10));
+		panel.add(label);
+		frame.add(panel);
+		
+		frame.setSize(300, 150);
+		frame.setLocationRelativeTo(null);	//화면 중앙에 뜸
+		frame.setVisible(true);
+		
+	}
 }
 
 //btn1(찜 버튼 셀에 추가)
@@ -112,6 +158,3 @@ class TableCell2 extends AbstractCellEditor implements TableCellEditor, TableCel
 	}
 	
 }
-   
-
-
