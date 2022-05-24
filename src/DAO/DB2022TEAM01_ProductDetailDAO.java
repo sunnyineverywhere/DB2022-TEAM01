@@ -1,7 +1,5 @@
 package DAO;
 
-import DTO.DB2022TEAM01_ProductDetailDTO;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Vector;
