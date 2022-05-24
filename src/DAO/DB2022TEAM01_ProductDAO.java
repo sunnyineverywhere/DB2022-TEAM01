@@ -59,6 +59,11 @@ public class DB2022TEAM01_ProductDAO {
 
         return ok;
     }
-
+    
+    //검색하는 함수, 필슈항목이 있어야 함.
+    public int search(String idol_group, String idol_mem, String keyword, String category) {
+    	String SQL = "";
+    	return 0;
+    }
 
 }
