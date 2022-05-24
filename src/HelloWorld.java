@@ -1,4 +1,5 @@
 
+import GUI.DB2022TEAM01_LogIn;
 import GUI.DB2022TEAM01_Main;
 import GUI.DB2022TEAM01_ProductRegister;
 import GUI.DB2022TEAM01_WishList;
@@ -79,7 +80,7 @@ public class HelloWorld {
          */
         
         
-        new DB2022TEAM01_Main();
+        new DB2022TEAM01_LogIn();
 
     }
 

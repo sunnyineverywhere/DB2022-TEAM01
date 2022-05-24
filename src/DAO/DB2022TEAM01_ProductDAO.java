@@ -12,6 +12,8 @@ public class DB2022TEAM01_ProductDAO {
     static final String USER = "DB2022Team01";
     static final String PASS = "DB2022Team01";
 
+
+
     public Connection getConnection(){
         Connection conn = null;
         try{
