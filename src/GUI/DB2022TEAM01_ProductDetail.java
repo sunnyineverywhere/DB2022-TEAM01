@@ -1,6 +1,9 @@
 package GUI;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -36,6 +39,21 @@ public class DB2022TEAM01_ProductDetail {
         
         table.setPreferredScrollableViewportSize(new Dimension (950, 650));
         table.setBackground(Color.pink); 
+        
+        JButton home = DB2022TEAM01_Main.make_home();
+        home.setBounds(950, 5, 30, 30);
+        panel.add(home);
+        
+        //홈버튼
+        home.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				frame.dispose();
+				new DB2022TEAM01_Main();
+			}
+		});
       
         JScrollPane pane = new JScrollPane(table); 
         panel.setLayout(new BorderLayout(10, 10));
