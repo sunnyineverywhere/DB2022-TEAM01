@@ -84,6 +84,16 @@ public class DB2022TEAM01_Main extends JFrame{
 				new DB2022TEAM01_ProductDetail();
 			}
 		});
+		
+		btn3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dispose();
+				new DB2022TEAM01_Search();
+			}
+		});
 
 		btn5.addActionListener(new ActionListener() {
 			@Override

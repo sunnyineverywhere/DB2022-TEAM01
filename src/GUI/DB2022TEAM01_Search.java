@@ -12,7 +12,7 @@ import javax.swing.*;
 
 //지원 작업
 public class DB2022TEAM01_Search extends JFrame{
-	private String [] categories = {"포토카드", "앨범", "인형", "시즌그리팅", "공식키트", "폴라로이드", "포스터", "잡지", "기타"};
+	private String [] categories = {"*포토카드", "*앨범", "*인형", "*시즌그리팅", "*공식키트", "*폴라로이드", "*포스터", "*잡지", "*기타"};
 		
 	public DB2022TEAM01_Search() {
 		setTitle("검색");
@@ -30,8 +30,8 @@ public class DB2022TEAM01_Search extends JFrame{
 		contentPane.add(title);
 		
 		//그룹명, 멤버명, 키워드 입력창
-		JTextField group = new JTextField("아이돌 그룹", 40);
-		JTextField member = new JTextField("멤버명", 40);
+		JTextField group = new JTextField("*아이돌 그룹", 40);
+		JTextField member = new JTextField("*멤버명", 40);
 		JTextField keyword = new JTextField("검색 키워드", 80);
 		//카테고리 선택 콤보박스
 		JComboBox<String> category = new JComboBox<>(categories);
@@ -99,8 +99,5 @@ public class DB2022TEAM01_Search extends JFrame{
 		
 	}
 	
-	public static void main(String[] args) {
-		DB2022TEAM01_Search s = new DB2022TEAM01_Search();
-		
-	}
+	
 }
