@@ -10,9 +10,13 @@ import java.awt.event.FocusListener;
 
 import javax.swing.*;
 
+import DAO.DB2022TEAM01_ProductDAO;
+
 //지원 작업
 public class DB2022TEAM01_Search extends JFrame{
 	private String [] categories = {"*포토카드", "*앨범", "*인형", "*시즌그리팅", "*공식키트", "*폴라로이드", "*포스터", "*잡지", "*기타"};
+	private String group_info = "*아이돌 그룹";
+	private String mem_info = "*멤버명";
 		
 	public DB2022TEAM01_Search() {
 		setTitle("검색");
@@ -29,9 +33,16 @@ public class DB2022TEAM01_Search extends JFrame{
 		title.setFont(font1);		
 		contentPane.add(title);
 		
+		//안내 문구
+		JLabel alert = new JLabel("*은 반드시 입력하세요.");
+		Font font1_1 = new Font("맑은 고딕", Font.PLAIN, 15);
+		alert.setBounds(145,194,160,18);
+		alert.setFont(font1_1);
+		contentPane.add(alert);
+		
 		//그룹명, 멤버명, 키워드 입력창
-		JTextField group = new JTextField("*아이돌 그룹", 40);
-		JTextField member = new JTextField("*멤버명", 40);
+		JTextField group = new JTextField(group_info, 40);
+		JTextField member = new JTextField(mem_info, 40);
 		JTextField keyword = new JTextField("검색 키워드", 80);
 		//카테고리 선택 콤보박스
 		JComboBox<String> category = new JComboBox<>(categories);
@@ -67,13 +78,47 @@ public class DB2022TEAM01_Search extends JFrame{
 		search_btn.setBackground(btn_color);
 		search_btn.setForeground(Color.white);
 		search_btn.setFont(font2);
-		search_btn.setBounds(438, 412, 125, 63);		
+		search_btn.setBounds(438, 412, 125, 63);	
+		
+		JButton home = DB2022TEAM01_Main.make_home();
+        home.setBounds(950, 5, 30, 30);
 				
 		contentPane.add(member);
 		contentPane.add(group);
 		contentPane.add(keyword);
 		contentPane.add(category);
 		contentPane.add(search_btn);
+		contentPane.add(home);
+		
+		search_btn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String idol_group = group.getText();
+				String idol_mem = member.getText();
+				String keyword_str = keyword.getText();
+				String category_str = category.getSelectedItem().toString();
+				if(idol_group.isBlank() || idol_group.equals(group_info) || idol_mem.isBlank() || idol_mem.equals(mem_info)) {
+					JOptionPane.showMessageDialog(DB2022TEAM01_Search.this, "아이돌 그룹과 멤버명을 입력해야 합니다.", "Message", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					//상품상세페이지 보여줌.
+				}
+					
+				
+			}
+		});
+		
+		//홈버튼
+        home.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dispose();
+				new DB2022TEAM01_Main();
+			}
+		});
 		
 		setSize(1000, 700);
 		setResizable(false);

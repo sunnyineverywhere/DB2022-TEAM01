@@ -65,7 +65,7 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
         
         
         JButton home = DB2022TEAM01_Main.make_home();
-        home.setBounds(800, 30, 30, 30);
+        home.setBounds(950, 5, 30, 30);
         c.add(home);
 
 
