@@ -19,4 +19,9 @@ public class DB2022TEAM01_User {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    public Long User(){
+        return userId;
+    }
+
 }
