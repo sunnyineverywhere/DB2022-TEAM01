@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import DAO.DB2022TEAM01_UserDAO;
+import DTO.DB2022TEAM01_User;
 
 public class DB2022TEAM01_LogIn extends JFrame{
 	public DB2022TEAM01_LogIn() {
@@ -63,6 +64,7 @@ public class DB2022TEAM01_LogIn extends JFrame{
 		
 		contentPane.add(login);
 		contentPane.add(signup);
+
 		
 		//login 버튼 클릭
 		login.addActionListener(new ActionListener() {
@@ -100,13 +102,14 @@ public class DB2022TEAM01_LogIn extends JFrame{
 		setResizable(false);
 		setLocationRelativeTo(null);	//화면 중앙에 뜸
 		setVisible(true);
+
+
+		// 로그인한 유저 저장
+		DB2022TEAM01_User user = new DB2022TEAM01_User();
+		user.setUserName(id_field.getText());
+
+
 	}
-	
-		
-	public static void main(String[] args) {
-		DB2022TEAM01_LogIn logIn = new DB2022TEAM01_LogIn();
-		
-	}
-	
+
 	
 }

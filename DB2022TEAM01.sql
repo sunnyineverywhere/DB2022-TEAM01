@@ -3,7 +3,6 @@ create database DB2022Team01;
 use DB2022Team01;
 
 
-
 # db 유저 생성 + 권한 부여
 create user 'DB2022Team01'@localhost identified by 'DB2022Team01';
 grant all privileges on DB2022Team01.* to 'DB2022Team01'@localhost;
@@ -20,11 +19,17 @@ create table `DB2022_user`(
 # 할 줄 아시는 분 도와주시면 감사하겠습니다!
 # group 변수명때문에 오류 났던 것 같음 -> gp로 수정
 create table `DB2022_idol`(
+	`idol_id` bigint not null auto_increment,
 	`gp` varchar(45) not null,
     `member` varchar(45) not null,
-    `quantity` BIGINT
-	
+    primary key(idol_id)
 );
+
+create table `DB2022_category`(
+	`category` varchar(45) not null primary key
+);
+
+
 
 # 아이돌에 아이디
 create table `DB2022_product`(
@@ -34,12 +39,11 @@ create table `DB2022_product`(
     `seller` varchar(45),
     `category` varchar(45),
     `idol_id` bigint,
-    `idol_group` varchar(45),
-    `idol_member` varchar(45),
     `isSold` bool,
     `date` date,
-    foreign key(idol_id) references DB2022_idol(id),
-    foreign key(seller) references DB2022_user(name)
+    foreign key(idol_id) references DB2022_idol(idol_id),
+    foreign key(seller) references DB2022_user(name),
+    foreign key(category) references DB2022_category(category)
 );
 
 

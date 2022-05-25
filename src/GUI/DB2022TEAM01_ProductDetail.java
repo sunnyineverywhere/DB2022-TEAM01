@@ -4,10 +4,34 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.sql.*;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.*;
 
 public class DB2022TEAM01_ProductDetail {
+
+
+	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	static final String DB_URL = "jdbc:mysql://localhost:3306/DB2022Team01";
+	static final String USER = "DB2022Team01";
+	static final String PASS = "DB2022Team01";
+
+	public Connection getConnection(){
+		Connection conn = null;
+		try{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn= DriverManager.getConnection(DB_URL, USER, PASS);
+		}catch(ClassNotFoundException | SQLException e){
+			e.printStackTrace();
+		}
+		return conn;
+	}
+
+	private PreparedStatement ps;
+	private ResultSet rs;
+
+
 	public DB2022TEAM01_ProductDetail() {
 		JFrame frame = new JFrame("상품 상세"); 
         JPanel panel = new JPanel();
@@ -22,14 +46,42 @@ public class DB2022TEAM01_ProductDetail {
  
         
         String col[] = { "상품명", "아이돌 그룹", "멤버명", "카테고리" , "매도자 ID", "가격", "등록 날짜", "찜", "매수" };   
- 
+
+		/*
         Object values[][] = { { "샤넬 가현 포카", "드림캐쳐", "가현", "포토카드" , "a456737", "15000", "2020/04/19", "찜", "매수" }, 
         		{ "자연광 수민 포카", "스테이씨", "수민", "포토카드" , "a456737", "15000", "2020/04/19", "찜", "매수" } , 
         		{ "세은 쥬얼 포카", "스테이씨", "세은", "포토카드" , "a456737", "15000", "2020/04/19", "찜", "매수" } , 
         		{ "이달의 소녀 응원봉", "이달의 소녀", "???", "응원봉" , "a456737", "35000", "2020/04/19", "찜", "매수" } 
                  };
- 
-        JTable table = new JTable(values, col); 
+ */
+		DefaultTableModel model = new DefaultTableModel(col, 0);
+
+		Vector record = new Vector();
+		Connection conn = getConnection();
+
+		int row = 1;
+		String SQL = "select * from DB2022_product where isSold = false";
+		try{
+			ps = conn.prepareStatement(SQL);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				record.add(Integer.toString(row++));
+				record.add(rs.getString("name"));
+				record.add("빈칸");
+				record.add("빈칸2");
+				record.add(rs.getString("category"));
+				record.add(rs.getString("seller"));
+				record.add(rs.getLong("price"));
+				record.add(rs.getString("date"));
+				model.addRow(record);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
+
+
+        JTable table = new JTable(model);
         table.setRowHeight(30);
         table.getColumnModel().getColumn(7).setCellRenderer(new TableCell1());
         table.getColumnModel().getColumn(7).setCellEditor(new TableCell1());;
