@@ -1,6 +1,5 @@
 package DAO;
 
-import DTO.DB2022TEAM01_User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +11,10 @@ public class DB2022TEAM01_UserDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-	public DB2022TEAM01_User user = new DB2022TEAM01_User();
+	private Long constantUserId;
+	private String constantUserName;
+
+
 
 	public DB2022TEAM01_UserDAO() {
 		try {			
@@ -25,8 +27,19 @@ public class DB2022TEAM01_UserDAO {
 			// TODO: handle exception\
 			e.printStackTrace();
 		}
-		
 	}
+
+
+	public Long getConstantUserId(){
+		return constantUserId;
+	}
+
+	public String getConstantUserName(){
+		return constantUserName;
+	}
+
+
+
 	//실제로 로그인하는 함수.
 	public int login(String userID, String userPassword) {
 		String SQL = "SELECT id, password FROM DB2022_user WHERE name = ?";
@@ -36,12 +49,8 @@ public class DB2022TEAM01_UserDAO {
 			rs = pstmt.executeQuery();	//rs에 쿼리문 실행 결과 넣기
 			if(rs.next()) {	//아이디 존재
 				if(rs.getString("password").contentEquals(userPassword)) {
-
-					// [선의] user 정보 저장
-					user.setUserName(userID);
-					System.out.println(user.getUserName());
-					user.setUserId(rs.getLong("id"));
-					System.out.println(user.getUserId());
+					constantUserId = rs.getLong("id");
+					constantUserName = userID;
 					return 1;	//로그인 성공
 				}
 				else {

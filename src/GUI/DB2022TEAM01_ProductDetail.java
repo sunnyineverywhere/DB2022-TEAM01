@@ -1,5 +1,7 @@
 package GUI;
 
+import com.mysql.cj.protocol.Resultset;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +10,7 @@ import java.sql.*;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.*;
+import javax.xml.transform.Result;
 
 public class DB2022TEAM01_ProductDetail {
 
@@ -28,8 +31,10 @@ public class DB2022TEAM01_ProductDetail {
 		return conn;
 	}
 
+
 	private PreparedStatement ps;
 	private ResultSet rs;
+
 
 
 	public DB2022TEAM01_ProductDetail() {
@@ -56,22 +61,38 @@ public class DB2022TEAM01_ProductDetail {
  */
 		DefaultTableModel model = new DefaultTableModel(col, 0);
 
-		Vector record = new Vector();
+
 		Connection conn = getConnection();
 
-		int row = 1;
-		String SQL = "select * from DB2022_product where isSold = false";
+
+		String SQL = "select * from DB2022_idol, DB2022_product where isSold = false and DB2022_idol.idol_id = DB2022_product.idol_id;";
 		try{
 			ps = conn.prepareStatement(SQL);
 			rs = ps.executeQuery();
+			int row = 1;
 			while(rs.next()){
-				record.add(Integer.toString(row++));
+				Vector record = new Vector();
+				row++;
+				System.out.println(row);
+				 // 샹품명
 				record.add(rs.getString("name"));
-				record.add("빈칸");
-				record.add("빈칸2");
+
+				// 아이돌 그룹
+				record.add(rs.getString("gp"));
+				
+				// 아이돌 이름
+				record.add(rs.getString("member"));
+
+				// 카테고리
 				record.add(rs.getString("category"));
+
+				// 판매자
 				record.add(rs.getString("seller"));
+
+				// 가격
 				record.add(rs.getLong("price"));
+
+				// 등록 날짜
 				record.add(rs.getString("date"));
 				model.addRow(record);
 			}

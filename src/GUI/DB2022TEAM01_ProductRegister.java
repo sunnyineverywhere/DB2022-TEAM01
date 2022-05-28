@@ -1,8 +1,8 @@
 package GUI;
 
 import DAO.DB2022TEAM01_ProductDAO;
+import DAO.DB2022TEAM01_UserDAO;
 import DTO.DB2022TEAM01_ProductDTO;
-import DTO.DB2022TEAM01_User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 
 public class DB2022TEAM01_ProductRegister extends JFrame {
     private String [] categories = {"포토카드", "앨범", "인형", "시즌그리팅", "공식키트", "폴라로이드", "포스터", "잡지", "기타"};
+
+
 
     public DB2022TEAM01_ProductRegister(){
         setTitle("상품 등록");
@@ -89,6 +91,9 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
         conform.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                DB2022TEAM01_UserDAO dao = new DB2022TEAM01_UserDAO();
+                Long userId = dao.getConstantUserId();
+                System.out.println(userId);
                 // gui에 입력된 값 가져오기
                 String productName = productNameInput.getText();
                 String IdolGroup = IdolGroupInput.getText();
@@ -96,7 +101,6 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
                 String categoryInput = category.getSelectedItem().toString();
                 String price_str = priceInput.getText();
                 Long price = Long.parseLong(price_str);
-                Long userId= Long.valueOf(1);
 
                 System.out.println(categoryInput);
 

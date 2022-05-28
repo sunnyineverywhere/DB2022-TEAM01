@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import DAO.DB2022TEAM01_UserDAO;
-import DTO.DB2022TEAM01_User;
+
 
 public class DB2022TEAM01_LogIn extends JFrame{
 	public DB2022TEAM01_LogIn() {
@@ -74,6 +74,7 @@ public class DB2022TEAM01_LogIn extends JFrame{
 				String id_value = id_field.getText();
 				String pw_value = new String(pw_field.getPassword());
 				DB2022TEAM01_UserDAO user_login = new DB2022TEAM01_UserDAO();
+
 				if(user_login.login(id_value, pw_value)==1) {	//로그인 성공
 					dispose();
 					new DB2022TEAM01_Main();
@@ -104,9 +105,7 @@ public class DB2022TEAM01_LogIn extends JFrame{
 		setVisible(true);
 
 
-		// 로그인한 유저 저장
-		DB2022TEAM01_User user = new DB2022TEAM01_User();
-		user.setUserName(id_field.getText());
+
 
 
 	}
