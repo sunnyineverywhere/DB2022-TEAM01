@@ -1,5 +1,6 @@
 package GUI;
 
+import DAO.DB2022TEAM01_LogInDAO;
 import com.mysql.cj.protocol.Resultset;
 
 import java.awt.*;
@@ -14,6 +15,7 @@ import javax.xml.transform.Result;
 
 public class DB2022TEAM01_ProductDetail {
 
+	DB2022TEAM01_LogInDAO logInFunc = new DB2022TEAM01_LogInDAO();
 
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost:3306/DB2022Team01";
@@ -73,7 +75,6 @@ public class DB2022TEAM01_ProductDetail {
 			while(rs.next()){
 				Vector record = new Vector();
 				row++;
-				System.out.println(row);
 				 // 샹품명
 				record.add(rs.getString("name"));
 
@@ -116,6 +117,8 @@ public class DB2022TEAM01_ProductDetail {
         JButton home = DB2022TEAM01_Main.make_home();
         home.setBounds(950, 5, 30, 30);
         panel.add(home);
+
+
         
         //홈버튼
         home.addActionListener(new ActionListener() {

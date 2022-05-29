@@ -3,9 +3,6 @@ package DTO;
 public class DB2022TEAM01_ProductDTO {
 
     private Long userId;
-
-
-
     private String name;
     private Long price;
     private String seller;
@@ -45,6 +42,7 @@ public class DB2022TEAM01_ProductDTO {
         this.userId = userId;
         this.name = name;
         this.price = price;
+        this.seller = seller;
         this.category = category;
         IdolGroup = idolGroup;
         IdolMember = idolMember;

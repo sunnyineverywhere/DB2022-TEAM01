@@ -1,5 +1,6 @@
 package GUI;
 
+import DAO.DB2022TEAM01_LogInDAO;
 import DAO.DB2022TEAM01_ProductDAO;
 import DAO.DB2022TEAM01_UserDAO;
 import DTO.DB2022TEAM01_ProductDTO;
@@ -10,6 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DB2022TEAM01_ProductRegister extends JFrame {
+
+    DB2022TEAM01_LogInDAO logInFunc = new DB2022TEAM01_LogInDAO();
+
     private String [] categories = {"포토카드", "앨범", "인형", "시즌그리팅", "공식키트", "폴라로이드", "포스터", "잡지", "기타"};
 
 
@@ -92,8 +96,12 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DB2022TEAM01_UserDAO dao = new DB2022TEAM01_UserDAO();
-                Long userId = dao.getConstantUserId();
+
+                Long userId = logInFunc.getLogInUser();
                 System.out.println(userId);
+                String sellerName = logInFunc.getLogInUserName(userId);
+                System.out.println(sellerName);
+
                 // gui에 입력된 값 가져오기
                 String productName = productNameInput.getText();
                 String IdolGroup = IdolGroupInput.getText();
@@ -102,9 +110,7 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
                 String price_str = priceInput.getText();
                 Long price = Long.parseLong(price_str);
 
-                System.out.println(categoryInput);
-
-                DB2022TEAM01_ProductDTO dto = new DB2022TEAM01_ProductDTO(userId, productName, price, "선의", categoryInput, IdolGroup, IdolMember);
+                DB2022TEAM01_ProductDTO dto = new DB2022TEAM01_ProductDTO(userId, productName, price, sellerName, categoryInput, IdolGroup, IdolMember);
                 new DB2022TEAM01_ProductDAO().productRegister(dto);
             }
         });

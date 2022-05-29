@@ -3,37 +3,84 @@ package GUI;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class DB2022TEAM01_TradeList extends JFrame {
 
-    public DB2022TEAM01_TradeList(){
-        setTitle("마이페이지 - 거래 내역");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/DB2022Team01";
+    static final String USER = "DB2022Team01";
+    static final String PASS = "DB2022Team01";
 
-        Container c = getContentPane();
-        c.setBackground(Color.white);
+    public Connection getConnection(){
+        Connection conn = null;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn= DriverManager.getConnection(DB_URL, USER, PASS);
+        }catch(ClassNotFoundException | SQLException e){
+            e.printStackTrace();
+        }
+        return conn;
+    }
 
-        JLabel title = new JLabel("마이페이지 - 거래 내역", SwingConstants.CENTER);
-        title.setBounds(320, 110, 360, 50);
-        Font font1 = new Font("맑은 고딕", Font.BOLD, 20);
-        title.setFont(font1);
-        c.add(title);
+    private PreparedStatement ps;
+    private ResultSet rs;
 
-        String header[] = {"상품명", "아이돌 그룹", "멤버명", "카테고리", "매도자", "가격"};
-        Object contents[] = new Object[0][6];
+    public DB2022TEAM01_TradeList() {
+        JFrame frame = new JFrame("거래 내역");
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel("거래 내역");
+        JButton bt1 = new JButton("찜");
+        JButton bt2 = new JButton("매수");
 
-        /*
-        DefaultTableModel model = new DefaultTableModel(contents, header);
+        Font font = new Font("맑은 고딕", Font.BOLD, 20);
+
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setFont(font);
+
+        String col[] = { "상품명", "아이돌 그룹", "멤버명", "카테고리", "매도자 ID", "매수자 ID", "가격", "매수" };
+
+        DefaultTableModel model = new DefaultTableModel(col, 0);
+
+
+        Connection conn = getConnection();
+
         JTable table = new JTable(model);
         table.setRowHeight(30);
 
+        table.setPreferredScrollableViewportSize(new Dimension (950, 650));
+        table.setBackground(Color.pink);
 
-         */
-        setSize(1000, 700);
-        setVisible(true);
+        JButton home = DB2022TEAM01_Main.make_home();
+        home.setBounds(950, 5, 30, 30);
+        panel.add(home);
 
+        //홈버튼
+        home.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                frame.dispose();
+                new DB2022TEAM01_Main();
+            }
+        });
+
+        JScrollPane pane = new JScrollPane(table);
+        panel.setLayout(new BorderLayout(10, 10));
+        panel.add(pane, BorderLayout.CENTER);
+        panel.add(label, BorderLayout.NORTH);
+        frame.add(panel);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1000, 700);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);	//화면 중앙에 뜸
+        frame.setVisible(true);
 
     }
+
 
 }

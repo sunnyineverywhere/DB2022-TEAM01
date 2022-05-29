@@ -6,6 +6,8 @@ import java.sql.*;
 
 public class DB2022TEAM01_ProductDAO {
 
+    DB2022TEAM01_LogInDAO logInFunc;
+
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/DB2022Team01";
     static final String USER = "DB2022Team01";
@@ -58,11 +60,13 @@ public class DB2022TEAM01_ProductDAO {
                 "(?, ?, ?, ?, ?, ?);";
         Long idolId = FindIdol(dto.getIdolGroup(), dto.getIdolMember());
 
+        System.out.println(dto.getUserId());
+
         try{
             ps = con.prepareStatement(SQL);
             ps.setString(1, dto.getName());
             ps.setLong(2, dto.getPrice());
-            ps.setString(3, "선의"); // 임의값
+            ps.setString(3, dto.getSeller()); // 임의값
             ps.setString(4, dto.getCategory());
             ps.setLong(5, idolId);
             ps.setDate(6, Date.valueOf("2020-01-01")); // 임의값
