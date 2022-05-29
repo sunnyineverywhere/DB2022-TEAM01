@@ -17,7 +17,7 @@ public class DB2022TEAM01_ProductDetail {
 
 	DB2022TEAM01_LogInDAO logInFunc = new DB2022TEAM01_LogInDAO();
 
-	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost:3306/DB2022Team01";
 	static final String USER = "DB2022Team01";
 	static final String PASS = "DB2022Team01";
@@ -182,7 +182,7 @@ class PopUp2 extends JFrame{
 		
 		frame.setSize(300, 150);
 		frame.setLocationRelativeTo(null);	//화면 중앙에 뜸
-		frame.setVisible(true);
+		frame.setVisible(true);		
 		
 	}
 }
@@ -228,7 +228,7 @@ class TableCell2 extends AbstractCellEditor implements TableCellEditor, TableCel
 	public TableCell2() {
 		btn2 = new JButton("매수");
 		btn2.addActionListener(e -> {
-			new PopUp2();
+			new PopUp2();			
 		});
 	}
 	

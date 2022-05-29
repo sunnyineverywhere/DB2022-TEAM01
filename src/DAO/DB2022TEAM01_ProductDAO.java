@@ -8,7 +8,7 @@ public class DB2022TEAM01_ProductDAO {
 
     DB2022TEAM01_LogInDAO logInFunc;
 
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/DB2022Team01";
     static final String USER = "DB2022Team01";
     static final String PASS = "DB2022Team01";
