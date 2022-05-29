@@ -112,6 +112,15 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
 
                 DB2022TEAM01_ProductDTO dto = new DB2022TEAM01_ProductDTO(userId, productName, price, sellerName, categoryInput, IdolGroup, IdolMember);
                 new DB2022TEAM01_ProductDAO().productRegister(dto);
+                
+                //등록되었습니다 창
+                JOptionPane.showMessageDialog(DB2022TEAM01_ProductRegister.this, "등록되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
+                
+                productNameInput.setText(null);
+                IdolGroupInput.setText(null);
+                IdolMemberInput.setText(null);
+                priceInput.setText(null);
+                
             }
         });
         

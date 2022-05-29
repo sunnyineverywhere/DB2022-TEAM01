@@ -108,7 +108,6 @@ public class DB2022TEAM01_LogIn extends JFrame{
 
 
 
-	}
-
+	}	
 	
 }
