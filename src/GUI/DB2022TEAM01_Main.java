@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import DAO.DB2022TEAM01_LogInDAO;
+
 public class DB2022TEAM01_Main extends JFrame{
 	public DB2022TEAM01_Main() {
 		setTitle("홈");
@@ -17,6 +19,16 @@ public class DB2022TEAM01_Main extends JFrame{
 		Container contentPane = getContentPane();
 		contentPane.setBackground(Color.white);
 		contentPane.setLayout(null);
+		
+		//user 정보
+		DB2022TEAM01_LogInDAO userInfo = new DB2022TEAM01_LogInDAO();
+		Long user_id = userInfo.getLogInUser();
+		String user_name = userInfo.getLogInUserName(user_id);
+		JLabel userName = new JLabel(user_name+"님");
+		userName.setHorizontalAlignment(JLabel.RIGHT);
+		Font font_u = new Font("맑은 고딕", Font.BOLD, 20);
+		userName.setFont(font_u);
+		userName.setBounds(745, 23, 221, 30);
 		
 		// 버튼 생성
 	    JButton btn1 = new JButton("상품등록");
@@ -57,6 +69,7 @@ public class DB2022TEAM01_Main extends JFrame{
 		btn5.setBounds(575,450,300,100);
 	
 		// 프레임에다가 버튼 추가
+		contentPane.add(userName);
 		contentPane.add(btn1);
 		contentPane.add(btn2);
 		contentPane.add(btn3);
@@ -94,6 +107,16 @@ public class DB2022TEAM01_Main extends JFrame{
 				new DB2022TEAM01_Search();
 			}
 		});
+		
+		btn4.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dispose();
+				new DB2022TEAM01_WishList();
+			}
+		});
 
 		btn4.addActionListener(new ActionListener() {
 			@Override
@@ -116,12 +139,12 @@ public class DB2022TEAM01_Main extends JFrame{
 		setLocationRelativeTo(null);	//화면 중앙에 뜸
 		setVisible(true);
 	}
-	
+	/*
 	public static void main(String[] args) {
 		DB2022TEAM01_Main main = new DB2022TEAM01_Main();
 		
 	}
-	
+	*/
 	public static JButton make_home() {
 		ImageIcon icon = new ImageIcon("home.png");
 		Image img = icon.getImage();
