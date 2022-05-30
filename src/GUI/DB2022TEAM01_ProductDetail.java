@@ -54,18 +54,9 @@ public class DB2022TEAM01_ProductDetail {
         
         String col[] = { "상품명", "아이돌 그룹", "멤버명", "카테고리" , "매도자 ID", "가격", "등록 날짜", "찜", "매수" };   
 
-		/*
-        Object values[][] = { { "샤넬 가현 포카", "드림캐쳐", "가현", "포토카드" , "a456737", "15000", "2020/04/19", "찜", "매수" }, 
-        		{ "자연광 수민 포카", "스테이씨", "수민", "포토카드" , "a456737", "15000", "2020/04/19", "찜", "매수" } , 
-        		{ "세은 쥬얼 포카", "스테이씨", "세은", "포토카드" , "a456737", "15000", "2020/04/19", "찜", "매수" } , 
-        		{ "이달의 소녀 응원봉", "이달의 소녀", "???", "응원봉" , "a456737", "35000", "2020/04/19", "찜", "매수" } 
-                 };
- */
 		DefaultTableModel model = new DefaultTableModel(col, 0);
 
-
 		Connection conn = getConnection();
-
 
 		String SQL = "select * from DB2022_idol, DB2022_product where isSold = false and DB2022_idol.idol_id = DB2022_product.idol_id;";
 		try{
@@ -107,6 +98,7 @@ public class DB2022TEAM01_ProductDetail {
         table.setRowHeight(30);
         table.getColumnModel().getColumn(7).setCellRenderer(new TableCell1());
         table.getColumnModel().getColumn(7).setCellEditor(new TableCell1());;
+
         
         table.getColumnModel().getColumn(8).setCellRenderer(new TableCell2());
         table.getColumnModel().getColumn(8).setCellEditor(new TableCell2());;
@@ -228,6 +220,7 @@ class TableCell2 extends AbstractCellEditor implements TableCellEditor, TableCel
 	public TableCell2() {
 		btn2 = new JButton("매수");
 		btn2.addActionListener(e -> {
+
 			new PopUp2();
 		});
 	}
