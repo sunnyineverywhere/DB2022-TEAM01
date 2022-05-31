@@ -36,7 +36,8 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
         JLabel IdolMember = new JLabel("멤버명 ");
         JLabel categoryTitle = new JLabel("카테고리 ");
         JLabel price = new JLabel("가격 ");
-
+        
+        //입력창
         JTextField productNameInput = new JTextField(45);
         JTextField IdolGroupInput = new JTextField(45);
         JTextField IdolMemberInput = new JTextField(45);
@@ -71,7 +72,8 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
         Color buttonColor = new Color(0xFF6472);
 
         conform.setBackground(buttonColor);
-        conform.setBounds(400, 500, 200, 100);
+        conform.setForeground(Color.white);
+        conform.setBounds(435, 500, 130, 60);
         conform.setFont(basic);
         c.add(conform);
         
@@ -100,26 +102,37 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
                 Long userId = logInFunc.getLogInUser();
                 System.out.println(userId);
                 String sellerName = logInFunc.getLogInUserName(userId);
-                System.out.println(sellerName);
-
-                // gui에 입력된 값 가져오기
-                String productName = productNameInput.getText();
-                String IdolGroup = IdolGroupInput.getText();
-                String IdolMember = IdolMemberInput.getText();
-                String categoryInput = category.getSelectedItem().toString();
-                String price_str = priceInput.getText();
-                Long price = Long.parseLong(price_str);
-
-                DB2022TEAM01_ProductDTO dto = new DB2022TEAM01_ProductDTO(userId, productName, price, sellerName, categoryInput, IdolGroup, IdolMember);
-                new DB2022TEAM01_ProductDAO().productRegister(dto);
+                System.out.println(sellerName);                
                 
-                //등록되었습니다 창
-                JOptionPane.showMessageDialog(DB2022TEAM01_ProductRegister.this, "등록되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
+                try {
+                	// gui에 입력된 값 가져오기
+                    String productName = productNameInput.getText();
+                    String IdolGroup = IdolGroupInput.getText();
+                    String IdolMember = IdolMemberInput.getText();
+                    String categoryInput = category.getSelectedItem().toString();
+                    String price_str = priceInput.getText();
+                    Long price = Long.parseLong(price_str);
+                    
+                	DB2022TEAM01_ProductDTO dto = new DB2022TEAM01_ProductDTO(userId, productName, price, sellerName, categoryInput, IdolGroup, IdolMember);
+                    new DB2022TEAM01_ProductDAO().productRegister(dto);
+                    
+                    //등록되었습니다 창
+                    JOptionPane.showMessageDialog(DB2022TEAM01_ProductRegister.this, "등록되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
+                    
+                    productNameInput.setText(null);
+                    IdolGroupInput.setText(null);
+                    IdolMemberInput.setText(null);
+                    priceInput.setText(null);
+				} catch (NumberFormatException e2) {	//제대로 입력하지 않았을 경우
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(DB2022TEAM01_ProductRegister.this, "등록에 실패하였습니다. 빈칸을 모두 채우세요.", "Message", JOptionPane.ERROR_MESSAGE);
+					productNameInput.setText(null);
+                    IdolGroupInput.setText(null);
+                    IdolMemberInput.setText(null);
+                    priceInput.setText(null);
+				}               
                 
-                productNameInput.setText(null);
-                IdolGroupInput.setText(null);
-                IdolMemberInput.setText(null);
-                priceInput.setText(null);
+                
                 
             }
         });
