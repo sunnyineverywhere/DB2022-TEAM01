@@ -11,6 +11,7 @@ import java.awt.event.FocusListener;
 import javax.swing.*;
 
 import DAO.DB2022TEAM01_ProductDAO;
+import DAO.DB2022TEAM01_SearchDAO;
 
 //지원 작업
 public class DB2022TEAM01_Search extends JFrame{
@@ -103,6 +104,8 @@ public class DB2022TEAM01_Search extends JFrame{
 				}
 				else {
 					//상품상세페이지 보여줌.
+					DB2022TEAM01_SearchDAO dao = new DB2022TEAM01_SearchDAO();
+					dao.Search(idol_group, idol_mem, keyword_str, category_str);
 				}
 					
 				
