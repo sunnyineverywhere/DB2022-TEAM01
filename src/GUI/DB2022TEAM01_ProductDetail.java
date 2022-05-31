@@ -57,7 +57,7 @@ public class DB2022TEAM01_ProductDetail {
         contentPane.add(label);
  
         
-        String col[] = { "상품 ID", "상품명", "아이돌 그룹", "멤버명", "카테고리" , "매도자 ID", "가격", "등록 날짜" };   
+        String col[] = { "상품 ID", "상품명", "아이돌 그룹", "멤버명", "카테고리" , "판매자", "가격", "등록 날짜" };   
 
 		DefaultTableModel model = new DefaultTableModel(col, 0);
 
@@ -113,7 +113,7 @@ public class DB2022TEAM01_ProductDetail {
         JLabel idInput_label = new JLabel("상품 ID:");
         JTextField idInput = new JTextField(10);
         JButton bt1 = new JButton("찜");
-        JButton bt2 = new JButton("매수");
+        JButton bt2 = new JButton("구매");
         
         Font font2 = new Font("맑은 고딕", Font.BOLD, 15);
         Font font3 = new Font("맑은 고딕", Font.BOLD, 11);
