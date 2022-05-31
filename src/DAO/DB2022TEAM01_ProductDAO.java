@@ -100,6 +100,29 @@ public class DB2022TEAM01_ProductDAO {
         return false;
     }
 
+    // 상품 구매
+    public boolean buyProduct(Long productId){
+        Connection conn = getConnection();
+        String SQL = "update DB2022_product set isSold = false where id = ?;";
+        String SQL2 = "update DB2022_trade set buyer_id = ?;";
+
+        try{
+            ps = conn.prepareStatement(SQL);
+            ps.setLong(1, productId);
+            ps.executeUpdate();
+
+            ps = conn.prepareStatement(SQL2);
+            Long userId = logInFunc.getLogInUser();
+            ps.setLong(1, userId);
+            ps.executeUpdate();
+
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 
 

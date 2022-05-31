@@ -32,12 +32,13 @@ public class DB2022TEAM01_TradeDAO {
         Connection conn = getConnection();
 
         Long id = Long.valueOf(0);
-        String SQL = "select MAX(product_id) from DB2022_product";
+        String SQL = "select MAX(id) as max_id from DB2022_product";
         try{
             ps = conn.prepareStatement(SQL);
             rs = ps.executeQuery();
             if(rs.next()){
-                id = rs.getLong("product_id");
+                id = rs.getLong("max_id");
+                System.out.println("등록된 아이디 : " + id);
             }
             return id;
         }catch (Exception e){
@@ -50,7 +51,7 @@ public class DB2022TEAM01_TradeDAO {
     public Boolean tradeRegister(){
         Connection conn = getConnection();
 
-        String SQL = "insert into DB2022_trade(product_id) value (?)";
+        String SQL = "insert into DB2022_trade(product_id) values (?);";
         Long productId = tradeFind();
 
         try{

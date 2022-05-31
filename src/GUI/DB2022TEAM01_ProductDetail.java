@@ -152,6 +152,9 @@ public class DB2022TEAM01_ProductDetail {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
+				Long productId = Long.parseLong(idInput.getText());
+				dao.buyProduct(productId);
 				new PopUp2();
 				//여기에 구매 처리하는 코드
 			}
