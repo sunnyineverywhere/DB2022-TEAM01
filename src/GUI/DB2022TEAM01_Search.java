@@ -14,7 +14,7 @@ import DAO.DB2022TEAM01_ProductDAO;
 
 //지원 작업
 public class DB2022TEAM01_Search extends JFrame{
-	private String [] categories = {"*포토카드", "*앨범", "*인형", "*시즌그리팅", "*공식키트", "*폴라로이드", "*포스터", "*잡지", "*기타"};
+	private String [] categories = {"포토카드", "앨범", "인형", "시즌그리팅", "공식키트", "폴라로이드", "포스터", "잡지", "기타"};
 	private String group_info = "*아이돌 그룹";
 	private String mem_info = "*멤버명";
 		

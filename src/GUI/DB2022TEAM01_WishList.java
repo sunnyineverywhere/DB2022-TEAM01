@@ -162,6 +162,7 @@ public class DB2022TEAM01_WishList extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Long productId = Long.parseLong(idInput.getText());
                 DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
+                dao.deleteWishList(productId);
                 dao.buyProduct(productId);
                 new PopUp2();
             }
