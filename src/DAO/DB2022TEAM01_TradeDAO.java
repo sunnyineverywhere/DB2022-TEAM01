@@ -28,11 +28,30 @@ public class DB2022TEAM01_TradeDAO {
         return conn;
     }
 
+    public Long tradeFind(){
+        Connection conn = getConnection();
+
+        Long id = Long.valueOf(0);
+        String SQL = "select MAX(product_id) from DB2022_product";
+        try{
+            ps = conn.prepareStatement(SQL);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                id = rs.getLong("product_id");
+            }
+            return id;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return id;
+    }
+
     // trade 등록
-    public Boolean tradeRegister(Long productId){
+    public Boolean tradeRegister(){
         Connection conn = getConnection();
 
         String SQL = "insert into DB2022_trade(product_id) value (?)";
+        Long productId = tradeFind();
 
         try{
             ps = conn.prepareStatement(SQL);

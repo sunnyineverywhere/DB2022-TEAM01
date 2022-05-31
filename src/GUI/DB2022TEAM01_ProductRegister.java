@@ -2,6 +2,7 @@ package GUI;
 
 import DAO.DB2022TEAM01_LogInDAO;
 import DAO.DB2022TEAM01_ProductDAO;
+import DAO.DB2022TEAM01_TradeDAO;
 import DAO.DB2022TEAM01_UserDAO;
 import DTO.DB2022TEAM01_ProductDTO;
 
@@ -112,6 +113,9 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
 
                 DB2022TEAM01_ProductDTO dto = new DB2022TEAM01_ProductDTO(userId, productName, price, sellerName, categoryInput, IdolGroup, IdolMember);
                 new DB2022TEAM01_ProductDAO().productRegister(dto);
+
+                // trade에도 등록
+                new DB2022TEAM01_TradeDAO().tradeRegister();
                 
                 //등록되었습니다 창
                 JOptionPane.showMessageDialog(DB2022TEAM01_ProductRegister.this, "등록되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
