@@ -100,6 +100,20 @@ public class DB2022TEAM01_ProductDAO {
         return false;
     }
 
+    // 위시리스트에서 상품 제거
+    public boolean deleteWishList(Long productId){
+        Connection conn = getConnection();
+        String SQL = "delete from DB2022_wishlist where product_id = ?;";
+        try{
+            ps = conn.prepareStatement(SQL);
+            ps.setLong(1, productId);
+            ps.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     // 상품 구매
     public boolean buyProduct(Long productId){
         Connection conn = getConnection();
