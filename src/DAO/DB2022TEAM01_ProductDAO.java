@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class DB2022TEAM01_ProductDAO {
 
-    DB2022TEAM01_LogInDAO logInFunc;
+    DB2022TEAM01_LogInDAO logInFunc = new DB2022TEAM01_LogInDAO();
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/DB2022Team01";
@@ -87,6 +87,7 @@ public class DB2022TEAM01_ProductDAO {
                 "value\n" +
                 "(?, ?);";
         Long userId = logInFunc.getLogInUser();
+        System.out.println(userId);
         try{
             ps = con.prepareStatement(SQL);
             ps.setLong(1, userId);
@@ -100,24 +101,9 @@ public class DB2022TEAM01_ProductDAO {
     }
 
 
-    // 위시리스트 뷰를 정의하는 함수
-    public boolean WishList(Long userId){
-        Connection con = getConnection();
-        String SQL =  "create view wishlist as\n" +
-                "                select product_id, name, price, seller, category, gp, member, isSold, date\n" +
-                "                from DB2022_product, DB2022_idol, DB2022_wishlist\n" +
-                "                where isSold = false and DB2022_idol.idol_id = DB2022_product.idol_id and DB2022_wishlist.user_id = ? and DB2022_product.id = DB2022_wishlist.product_id;";
-        try{
-            ps = con.prepareStatement(SQL);
-            ps.setLong(1, userId);
-            ps.executeUpdate();
-            return true;
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return false;
-    }
+
+
 
 }
 

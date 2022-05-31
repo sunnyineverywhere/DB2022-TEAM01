@@ -54,14 +54,16 @@ public class DB2022TEAM01_WishList extends JFrame {
 
         DefaultTableModel model = new DefaultTableModel(col, 0);
         Long userId = loginfunc.getLogInUser();
-        dao.WishList(userId);
 
 
         Connection conn = getConnection();
 
-        String SQL = "select * from DB2022TEAM01.wishlist;";
+        String SQL = "select id, name, gp, member, category, seller, price\n" +
+                "from DB2022_product, DB2022_wishlist, DB2022_idol\n" +
+                "where DB2022_wishlist.user_id = ? and DB2022_wishlist.product_id = DB2022_product.id and DB2022_product.idol_id = DB2022_idol.idol_id;\n";
         try{
             ps = conn.prepareStatement(SQL);
+            ps.setLong(1, userId);
             rs = ps.executeQuery();
             int row = 1;
             while(rs.next()){
@@ -88,8 +90,6 @@ public class DB2022TEAM01_WishList extends JFrame {
                 // 가격
                 record.add(rs.getLong("price"));
 
-                // 등록 날짜
-                record.add(rs.getString("date"));
                 model.addRow(record);
             }
         }catch (Exception e){

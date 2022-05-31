@@ -1,6 +1,7 @@
 package GUI;
 
 import DAO.DB2022TEAM01_LogInDAO;
+import DAO.DB2022TEAM01_ProductDAO;
 import com.mysql.cj.protocol.Resultset;
 
 import java.awt.*;
@@ -137,6 +138,9 @@ public class DB2022TEAM01_ProductDetail {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
+				Long productId = Long.parseLong(idInput.getText());
+				dao.addWishlist(productId);
 				new PopUp1();
 				//여기에 위시리스트에 추가하는 코드
 			}

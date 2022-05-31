@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import DAO.DB2022TEAM01_LogInDAO;
+import DAO.DB2022TEAM01_ProductDAO;
 
 public class DB2022TEAM01_Main extends JFrame{
 	public DB2022TEAM01_Main() {
@@ -139,7 +140,7 @@ public class DB2022TEAM01_Main extends JFrame{
 	}
 	*/
 	public static JButton make_home() {
-		ImageIcon icon = new ImageIcon("home.png");
+		ImageIcon icon = new ImageIcon("../home.png");
 		Image img = icon.getImage();
 		Image changeImg = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		ImageIcon home = new ImageIcon(changeImg);
