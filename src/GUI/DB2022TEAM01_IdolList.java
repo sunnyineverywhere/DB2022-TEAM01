@@ -119,8 +119,4 @@ public class DB2022TEAM01_IdolList extends JFrame{
         frame.setVisible(true);
 	}
 	
-	public static void main(String args[]){
-
-        new DB2022TEAM01_IdolList();
-    }
 }

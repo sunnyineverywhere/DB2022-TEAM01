@@ -37,6 +37,7 @@ public class DB2022TEAM01_Main extends JFrame{
 	    JButton btn3 = new JButton("검색");
  	    JButton btn4 = new JButton("마이페이지-위시리스트");
 	    JButton btn5 = new JButton("마이페이지-거래내역");
+	    JButton btn6 = new JButton("아이돌 리스트");
 	    
 	    //버튼색 지정-지원
 	    Color btn_color=new Color(0xFF6472);
@@ -61,13 +62,18 @@ public class DB2022TEAM01_Main extends JFrame{
 	    btn5.setBackground(btn_color);
 	    btn5.setForeground(Color.white);
 	    btn5.setFont(font);
+	    
+	    btn6.setBackground(btn_color);
+	    btn6.setForeground(Color.white);
+	    btn6.setFont(font);
 
 	    // 버튼 위치와 크기 설정
-	    btn1.setBounds(125,150,300,100);
-	    btn2.setBounds(575,150,300,100);
- 	    btn3.setBounds(350,300,300,100);
-    	btn4.setBounds(125,450,300,100);
-		btn5.setBounds(575,450,300,100);
+	    btn1.setBounds(180,129,300,100);
+	    btn2.setBounds(520,129,300,100);
+ 	    btn3.setBounds(180,272,300,100);
+    	btn4.setBounds(520,272,300,100);
+		btn5.setBounds(180,415,300,100);
+		btn6.setBounds(520,415,300,100);
 	
 		// 프레임에다가 버튼 추가
 		contentPane.add(userName);
@@ -76,6 +82,7 @@ public class DB2022TEAM01_Main extends JFrame{
 		contentPane.add(btn3);
 		contentPane.add(btn4);
 		contentPane.add(btn5);
+		contentPane.add(btn6);
 		
 		//버튼 클릭시 이동 - 지원
 		//상품 등록 버튼
@@ -125,6 +132,16 @@ public class DB2022TEAM01_Main extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				new DB2022TEAM01_TradeList();
+			}
+		});
+		
+		btn6.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dispose();
+				new DB2022TEAM01_IdolList();
 			}
 		});
 		
