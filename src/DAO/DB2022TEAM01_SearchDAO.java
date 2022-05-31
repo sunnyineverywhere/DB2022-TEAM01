@@ -30,7 +30,9 @@ public class DB2022TEAM01_SearchDAO {
     public boolean Search(String gp, String member, String keyword, String category){
         Connection conn = getConnection();
 
-        String SQL = "select * from DB2022_product where idol_id = ? and category = ? and name like ?; ";
+        String SQL = "create view search_result as\n" +
+                "select id, name, gp, member, category from DB2022_product, DB2022_idol \n" +
+                "where DB2022_product.idol_id = ? and DB2022_idol.idol_id = DB2022_product.idol_id and category = ? and name like ?";
 
         try{
             ps = conn.prepareStatement(SQL);
@@ -42,12 +44,7 @@ public class DB2022TEAM01_SearchDAO {
             String searchInput = "%" + keyword + "%";
             ps.setString(3, searchInput);
 
-            rs = ps.executeQuery();
-
-            if(rs.next()){
-                String tmp = rs.getString("name");
-                System.out.println(tmp);
-            }
+            ps.executeUpdate();
             return true;
 
         }catch (Exception e){
