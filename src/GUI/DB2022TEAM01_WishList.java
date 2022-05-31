@@ -146,6 +146,15 @@ public class DB2022TEAM01_WishList extends JFrame {
             }
         });
 
+        bt2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Long productId = Long.parseLong(idInput.getText());
+                DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
+                dao.buyProduct(productId);
+            }
+        });
+
         JScrollPane pane = new JScrollPane(table);
         pane.setBounds(0, 60, 988, 510);
         contentPane.add(pane);        

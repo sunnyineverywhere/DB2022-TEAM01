@@ -103,7 +103,7 @@ public class DB2022TEAM01_ProductDAO {
     // 상품 구매
     public boolean buyProduct(Long productId){
         Connection conn = getConnection();
-        String SQL = "update DB2022_product set isSold = false where id = ?;";
+        String SQL = "update DB2022_product set isSold = true where id = ?;";
         String SQL2 = "update DB2022_trade set buyer_id = ?;";
 
         try{
