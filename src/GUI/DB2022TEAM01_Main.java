@@ -133,14 +133,9 @@ public class DB2022TEAM01_Main extends JFrame{
 		setLocationRelativeTo(null);	//화면 중앙에 뜸
 		setVisible(true);
 	}
-	/*
-	public static void main(String[] args) {
-		DB2022TEAM01_Main main = new DB2022TEAM01_Main();
-		
-	}
-	*/
+	
 	public static JButton make_home() {
-		ImageIcon icon = new ImageIcon("../home.png");
+		ImageIcon icon = new ImageIcon("home.png");
 		Image img = icon.getImage();
 		Image changeImg = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		ImageIcon home = new ImageIcon(changeImg);
