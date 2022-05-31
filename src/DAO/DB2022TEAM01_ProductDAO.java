@@ -55,9 +55,9 @@ public class DB2022TEAM01_ProductDAO {
     public boolean productRegister(DB2022TEAM01_ProductDTO dto){
         Connection con = getConnection();
 
-        String SQL = "insert into DB2022_product(name, price, seller, category, idol_id, date)\n" +
+        String SQL = "insert into DB2022_product(name, price, seller, category, idol_id, date, user_id)\n" +
                 "values\n" +
-                "(?, ?, ?, ?, ?, ?);";
+                "(?, ?, ?, ?, ?, ?, ?);";
         Long idolId = FindIdol(dto.getIdolGroup(), dto.getIdolMember());
 
         System.out.println(dto.getUserId());
@@ -70,6 +70,7 @@ public class DB2022TEAM01_ProductDAO {
             ps.setString(4, dto.getCategory());
             ps.setLong(5, idolId);
             ps.setDate(6, Date.valueOf("2020-01-01")); // 임의값
+            ps.setLong(7, dto.getUserId());
             ps.executeUpdate();
             return true;
 
