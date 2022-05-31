@@ -135,6 +135,7 @@ public class DB2022TEAM01_WishList extends JFrame {
         contentPane.add(bt1);
         contentPane.add(bt2);
         
+                
         //홈버튼
         home.addActionListener(new ActionListener() {
 
@@ -145,22 +146,24 @@ public class DB2022TEAM01_WishList extends JFrame {
                 new DB2022TEAM01_Main();
             }
         });
-
+        //찜 해제 버튼
         bt1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Long productId = Long.parseLong(idInput.getText());
                 DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
                 dao.deleteWishList(productId);
+                new PopUp3();
             }
         });
-
+        //구매 버튼
         bt2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Long productId = Long.parseLong(idInput.getText());
                 DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
                 dao.buyProduct(productId);
+                new PopUp2();
             }
         });
 

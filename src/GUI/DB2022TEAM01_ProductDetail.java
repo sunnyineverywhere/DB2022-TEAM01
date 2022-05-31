@@ -231,3 +231,23 @@ class PopUp2 extends JFrame{
 	}
 }
 
+class PopUp3 extends JFrame{
+	public PopUp3() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrame frame = new JFrame("찜 해제");
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel("위시리스트에서 제거했습니다.", JLabel.CENTER);
+		
+		label.setHorizontalAlignment(JLabel.CENTER);
+	    label.setFont(label.getFont().deriveFont(15.0f));
+
+	    panel.setLayout(new BorderLayout(10, 10));
+		panel.add(label);
+		frame.add(panel);
+		
+		frame.setSize(300, 150);
+		frame.setLocationRelativeTo(null);	//화면 중앙에 뜸
+		frame.setVisible(true);
+		
+	}
+}
