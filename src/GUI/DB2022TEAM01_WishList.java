@@ -35,17 +35,22 @@ public class DB2022TEAM01_WishList extends JFrame {
 
     public DB2022TEAM01_WishList() {
         JFrame frame = new JFrame("위시리스트");
-        JPanel panel = new JPanel();
-        JLabel label = new JLabel("위시리스트");
-        JButton bt1 = new JButton("찜 해제");
-        JButton bt2 = new JButton("매수");
+        Container contentPane = frame.getContentPane();
+        
+        contentPane.setBackground(Color.white);
+		contentPane.setLayout(null);
+		
+        JLabel label = new JLabel("위시리스트");        
 
         Font font = new Font("맑은 고딕", Font.BOLD, 20);
 
+        //페이지 제목
+        label.setBounds(445, 23, 110, 25);
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setFont(font);
+        contentPane.add(label);
 
-        String col[] = { "상품명", "아이돌 그룹", "멤버명", "카테고리", "매도자 ID", "가격", "매수" };
+        String col[] = { "상품 ID", "상품명", "아이돌 그룹", "멤버명", "카테고리", "매도자 ID", "가격" };
 
         DefaultTableModel model = new DefaultTableModel(col, 0);
         Long userId = loginfunc.getLogInUser();
@@ -62,6 +67,9 @@ public class DB2022TEAM01_WishList extends JFrame {
             while(rs.next()){
                 Vector record = new Vector();
                 row++;
+                //상품 id
+				record.add(rs.getInt("id"));
+				
                 // 샹품명
                 record.add(rs.getString("name"));
 
@@ -93,11 +101,40 @@ public class DB2022TEAM01_WishList extends JFrame {
 
         table.setPreferredScrollableViewportSize(new Dimension (950, 650));
         table.setBackground(Color.pink);
-
+        
+        //홈버튼 추가
         JButton home = DB2022TEAM01_Main.make_home();
         home.setBounds(950, 5, 30, 30);
-        panel.add(home);
+        contentPane.add(home);
 
+        //찜 해제, 매수하기
+        JLabel idInput_label = new JLabel("상품 ID:");
+        JTextField idInput = new JTextField(10);
+        JButton bt1 = new JButton("찜 해제");
+        JButton bt2 = new JButton("매수");
+        
+        Font font2 = new Font("맑은 고딕", Font.BOLD, 15);
+        Font font3 = new Font("맑은 고딕", Font.BOLD, 11);
+        Color btn_color=new Color(0xFF6472);
+		
+        idInput_label.setFont(font2);
+        bt1.setFont(font3);
+        bt1.setBackground(btn_color);
+		bt1.setForeground(Color.white);
+        bt2.setFont(font3);
+        bt2.setBackground(btn_color);
+		bt2.setForeground(Color.white);
+        
+        idInput_label.setBounds(298, 600, 58, 20);
+        idInput.setBounds(369, 600, 178, 26);
+        bt1.setBounds(567, 600, 75, 26);
+        bt2.setBounds(653, 600, 60, 26);
+        
+        contentPane.add(idInput_label);
+        contentPane.add(idInput);
+        contentPane.add(bt1);
+        contentPane.add(bt2);
+        
         //홈버튼
         home.addActionListener(new ActionListener() {
 
@@ -110,10 +147,8 @@ public class DB2022TEAM01_WishList extends JFrame {
         });
 
         JScrollPane pane = new JScrollPane(table);
-        panel.setLayout(new BorderLayout(10, 10));
-        panel.add(pane, BorderLayout.CENTER);
-        panel.add(label, BorderLayout.NORTH);
-        frame.add(panel);
+        pane.setBounds(0, 60, 988, 510);
+        contentPane.add(pane);        
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 700);
@@ -123,4 +158,8 @@ public class DB2022TEAM01_WishList extends JFrame {
 
 
     }
+    public static void main(String[] args) {
+		new DB2022TEAM01_WishList();
+		
+	}
 }

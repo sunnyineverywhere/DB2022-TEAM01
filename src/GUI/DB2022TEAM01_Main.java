@@ -117,14 +117,7 @@ public class DB2022TEAM01_Main extends JFrame{
 				new DB2022TEAM01_WishList();
 			}
 		});
-
-		btn4.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new DB2022TEAM01_WishList();
-			}
-		});
+		
 
 		btn5.addActionListener(new ActionListener() {
 			@Override
