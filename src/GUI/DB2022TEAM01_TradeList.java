@@ -1,13 +1,18 @@
 package GUI;
 
+import DAO.DB2022TEAM01_LogInDAO;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.Vector;
 
 public class DB2022TEAM01_TradeList extends JFrame {
+
+    DB2022TEAM01_LogInDAO logInFunc = new DB2022TEAM01_LogInDAO();
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/DB2022Team01";
@@ -40,12 +45,53 @@ public class DB2022TEAM01_TradeList extends JFrame {
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setFont(font);
 
-        String col[] = { "상품명", "아이돌 그룹", "멤버명", "카테고리", "매도자 ID", "매수자 ID", "가격", "매수" };
+        String col[] = { "번호","상품명", "아이돌 그룹", "멤버명", "카테고리", "매도자 ID", "매수자 ID", "가격"};
 
         DefaultTableModel model = new DefaultTableModel(col, 0);
 
+       Connection conn = getConnection();
 
-        Connection conn = getConnection();
+        String SQL = "select distinct id, name, user_id, DB2022_product.idol_id, gp, member, price, seller, buyer_id, category\n" +
+                "from DB2022_product, DB2022_trade, DB2022_idol\n" +
+                "where (DB2022_product.user_id = ? or DB2022_trade.buyer_id = ?) and DB2022_idol.idol_id = DB2022_product.idol_id;";
+
+        Long userId= logInFunc.getLogInUser();
+
+        try{
+            ps = conn.prepareStatement(SQL);
+            ps.setLong(1, userId);
+            ps.setLong(2, userId);
+            rs = ps.executeQuery();
+
+            while(rs.next()){
+                Vector record = new Vector();
+                record.add(rs.getLong("id"));
+                record.add(rs.getString("name"));
+                record.add(rs.getString("gp"));
+                record.add(rs.getString("member"));
+                record.add(rs.getString("category"));
+                record.add(rs.getString("seller"));
+
+
+                Long buyerId = rs.getLong("buyer_id");
+                if(buyerId != null){
+                    String  buyerName = logInFunc.getLogInUserName(buyerId);
+                    record.add(buyerName);
+                }
+                else{
+                    record.add(" ");
+                }
+
+                record.add(rs.getLong("price"));
+
+                model.addRow(record);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
 
         JTable table = new JTable(model);
         table.setRowHeight(30);
