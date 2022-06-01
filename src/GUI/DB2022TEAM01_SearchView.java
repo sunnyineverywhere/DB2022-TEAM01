@@ -112,6 +112,62 @@ public class DB2022TEAM01_SearchView {
 
         table.setPreferredScrollableViewportSize(new Dimension (950, 650));
         table.setBackground(Color.pink);
+        
+      //찜, 매수하기
+        JLabel idInput_label = new JLabel("상품 ID:");
+        JTextField idInput = new JTextField(10);
+        JButton bt1 = new JButton("찜");
+        JButton bt2 = new JButton("구매");
+        
+        Font font2 = new Font("맑은 고딕", Font.BOLD, 15);
+        Font font3 = new Font("맑은 고딕", Font.BOLD, 11);
+        Color btn_color=new Color(0xFF6472);
+		
+        idInput_label.setFont(font2);
+        bt1.setFont(font3);
+        bt1.setBackground(btn_color);
+		bt1.setForeground(Color.white);
+        bt2.setFont(font3);
+        bt2.setBackground(btn_color);
+		bt2.setForeground(Color.white);
+        
+        idInput_label.setBounds(298, 600, 58, 20);
+        idInput.setBounds(369, 600, 178, 26);
+        bt1.setBounds(567, 600, 45, 26);
+        bt2.setBounds(621, 600, 60, 26);
+        
+        //찜 버튼 눌렀을 때
+        bt1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
+				Long productId = Long.parseLong(idInput.getText());
+				dao.addWishlist(productId);
+				new PopUp1();
+				//여기에 위시리스트에 추가하는 코드
+			}
+		});
+        
+        //매수 버튼 눌렀을 때
+        bt2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
+				Long productId = Long.parseLong(idInput.getText());
+				dao.buyProduct(productId);
+				new PopUp2();
+				//여기에 구매 처리하는 코드
+			}
+		});
+        
+        contentPane.add(idInput_label);
+        contentPane.add(idInput);
+        contentPane.add(bt1);
+        contentPane.add(bt2);
 
         //홈버튼 추가
         JButton home = DB2022TEAM01_Main.make_home();
