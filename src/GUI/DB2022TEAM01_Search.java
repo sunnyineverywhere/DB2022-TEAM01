@@ -18,6 +18,7 @@ public class DB2022TEAM01_Search extends JFrame{
 	private String [] categories = {"포토카드", "앨범", "인형", "시즌그리팅", "공식키트", "폴라로이드", "포스터", "잡지", "기타"};
 	private String group_info = "*아이돌 그룹";
 	private String mem_info = "*멤버명";
+	private String key_info = "검색 키워드";
 		
 	public DB2022TEAM01_Search() {
 		setTitle("검색");
@@ -44,7 +45,7 @@ public class DB2022TEAM01_Search extends JFrame{
 		//그룹명, 멤버명, 키워드 입력창
 		JTextField group = new JTextField(group_info, 40);
 		JTextField member = new JTextField(mem_info, 40);
-		JTextField keyword = new JTextField("검색 키워드", 80);
+		JTextField keyword = new JTextField(key_info, 80);
 		//카테고리 선택 콤보박스
 		JComboBox<String> category = new JComboBox<>(categories);
 		
@@ -99,8 +100,8 @@ public class DB2022TEAM01_Search extends JFrame{
 				String idol_mem = member.getText();
 				String keyword_str = keyword.getText();
 				String category_str = category.getSelectedItem().toString();
-				if(idol_group.isBlank() || idol_group.equals(group_info) || idol_mem.isBlank() || idol_mem.equals(mem_info)) {
-					JOptionPane.showMessageDialog(DB2022TEAM01_Search.this, "아이돌 그룹과 멤버명을 입력해야 합니다.", "Message", JOptionPane.ERROR_MESSAGE);
+				if(idol_group.isBlank() || idol_group.equals(group_info) || idol_mem.isBlank() || idol_mem.equals(mem_info) || keyword_str.equals(key_info)) {
+					JOptionPane.showMessageDialog(DB2022TEAM01_Search.this, "아이돌 그룹과 멤버명을 입력해야 합니다. 키워드가 없다면 빈칸으로 채우세요.", "Message", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					//상품상세페이지 보여줌.
