@@ -27,12 +27,13 @@ public class DB2022TEAM01_SearchDAO {
         return conn;
     }
 
-    public boolean Search(String gp, String member, String keyword, String category){
+    // 검색 화면 뷰 생성
+    public ResultSet Search(String gp, String member, String keyword, String category){
         Connection conn = getConnection();
 
-        String SQL = "create view search_result as\n" +
-                "select id, name, gp, member, category from DB2022_product, DB2022_idol \n" +
-                "where DB2022_product.idol_id = ? and DB2022_idol.idol_id = DB2022_product.idol_id and category = ? and name like ?";
+        String SQL = "select id, name, gp, member, category, price from DB2022_product, DB2022_idol \n" +
+                "where DB2022_product.idol_id = ? and DB2022_idol.idol_id = DB2022_product.idol_id " +
+                "and category = ? and name like ?";
 
         try{
             ps = conn.prepareStatement(SQL);
@@ -45,12 +46,15 @@ public class DB2022TEAM01_SearchDAO {
             ps.setString(3, searchInput);
 
             ps.executeUpdate();
-            return true;
+            rs = ps.executeQuery();
+            return rs;
 
         }catch (Exception e){
             e.printStackTrace();
         }
-        return false;
+        return rs;
     }
+
+
 
 }

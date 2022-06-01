@@ -105,7 +105,9 @@ public class DB2022TEAM01_Search extends JFrame{
 				else {
 					//상품상세페이지 보여줌.
 					DB2022TEAM01_SearchDAO dao = new DB2022TEAM01_SearchDAO();
-					dao.Search(idol_group, idol_mem, keyword_str, category_str);
+
+					dispose();
+					new DB2022TEAM01_SearchView(idol_group, idol_mem, keyword_str, category_str);
 				}
 					
 				
