@@ -14,41 +14,12 @@ create table `DB2022_user`(
     `login` bool default false
 );
 
-select * from DB2022_user;
-
-select * from DB2022_product;
-
-select * from DB2022_idol, DB2022_product where isSold = false and DB2022_idol.idol_id = DB2022_product.idol_id;
-
-# 두개 묶어서 primary key -> ?
-# group 변수명때문에 오류 났던 것 같음 -> gp로 수정
 create table `DB2022_idol`(
 	`idol_id` bigint not null auto_increment,
 	`gp` varchar(45) not null,
     `member` varchar(45) not null,
     primary key(idol_id)
 );
-
-select * from DB2022_idol, DB2022_product where isSold = false and DB2022_idol.idol_id = DB2022_product.idol_id;
-
-
-insert into DB2022_user(name, password)
-values
-	("선의", "1234"),
-    ("지원", "4321");
-
-select * from DB2022_idol;
-
-INSERT INTO DB2022_idol(gp, member)
-values
-("세븐틴", "에스쿱스"),
-("세븐틴", "정한"),
-("세븐틴", "조슈아"),
-("세븐틴", "준"),
-("세븐틴", "호시")
-;
-
-
 
 # 상품
 create table `DB2022_product`(
@@ -67,15 +38,6 @@ create table `DB2022_product`(
     check((category) in ('포토카드', '앨범', '인형', '시즌그리팅', '공식키트', '폴라로이드', '포스터', '잡지', '기타'))
 );
 
-
-insert into DB2022_product(user_id, name, price, seller, category, idol_id, date)
-values
-(2, "포카", 40000, "지원", "포토카드", 1, "2017-01-01")
-;
-
-select * from DB2022_product;
-select * from DB2022_idol;
-
 # 유저의 거래 내역
 create table `DB2022_trade` (
 	`trade_id` bigint auto_increment primary key,
@@ -85,26 +47,6 @@ create table `DB2022_trade` (
     foreign key(buyer_id) references DB2022_user(id)
 );
 
-# 프로덕트를 등록할 때 trade에도 등록되어야 함
-# 매수 시에 buyer_id가 추가된다
-# gui에는 buyer_id와 product에서 user_id가 로그인 된 id를 데려오기
-select * from DB2022_product;
-select * from DB2022_trade;
-
-
-
-select distinct trade_id, name, user_id, price, seller, buyer_id, date, isSold, category
-from DB2022_product, DB2022_trade
-where DB2022_product.user_id = 1 or DB2022_trade.buyer_id = 1;
-
-# 가라데이터
-insert into DB2022_trade(product_id)
-values
-(3),
-(4);
-
-
-
 create table `DB2022_wishlist`(
     `user_id` bigint,
     `product_id` bigint,
@@ -112,6 +54,55 @@ create table `DB2022_wishlist`(
     foreign key(product_id) references DB2022_product(id)
 );
 
+
+# 인덱스 생성
+create index idx_idol on db2022team01.db2022_idol
+(gp, member);
+
+create index idx_user on db2022team01.db2022_user
+(name, password);
+
+create index idx_category on db2022team01.db2022_product
+(category);
+
+create index idx_user_login on db2022team01.db2022_user
+(login);
+
+# 예시 데이터 삽입 이후 실행 할 것
+# 뷰 생성
+create view idol_list as
+select gp, member from db2022team01.db2022_idol;
+
+
+
+insert into DB2022_user(name, password)
+values
+	("선의", "1234"),
+    ("지원", "4321");
+
+INSERT INTO DB2022_idol(gp, member)
+values
+("세븐틴", "에스쿱스"),
+("세븐틴", "정한"),
+("세븐틴", "조슈아"),
+("세븐틴", "준"),
+("세븐틴", "호시")
+;
+
+
 insert into DB2022_wishlist(user_id, product_id)
 value
 (1, 3);
+
+
+insert into DB2022_product(user_id, name, price, seller, category, idol_id, date)
+values
+(2, "포카", 40000, "지원", "포토카드", 1, "2017-01-01")
+;
+
+
+# 가라데이터
+insert into DB2022_trade(product_id)
+values
+(1);
+

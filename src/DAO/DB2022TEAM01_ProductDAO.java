@@ -34,7 +34,9 @@ public class DB2022TEAM01_ProductDAO {
         Connection con = getConnection(); // 연결
 
         // idol db 불러오기
-        String SQL_idol = "select idol_id from DB2022_idol where gp = ? and member = ?";
+        String SQL_idol = "select idol_id from DB2022_idol " +
+                "use index(idx_idol) " +
+                "where gp = ? and member = ?";
         Long id = null;
         try {
             ps = con.prepareStatement(SQL_idol);
