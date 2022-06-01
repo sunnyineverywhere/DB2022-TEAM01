@@ -36,13 +36,13 @@ public class DB2022TEAM01_SearchView {
     private ResultSet rs;
 
     public DB2022TEAM01_SearchView(String gp, String member, String keyword, String category){
-        JFrame frame = new JFrame("위시리스트");
+        JFrame frame = new JFrame("검색 결과");
         Container contentPane = frame.getContentPane();
 
         contentPane.setBackground(Color.white);
         contentPane.setLayout(null);
 
-        JLabel label = new JLabel("위시리스트");
+        JLabel label = new JLabel("검색 결과");
 
         Font font = new Font("맑은 고딕", Font.BOLD, 20);
 
