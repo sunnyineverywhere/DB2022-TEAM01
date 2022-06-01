@@ -64,7 +64,6 @@ public class DB2022TEAM01_SearchView {
 
         try{
             String SQL = "select id, name, gp, member, category, price from DB2022_product, DB2022_idol \n" +
-                    "use index(idx_category) " +
                     "where DB2022_product.idol_id = ? and DB2022_idol.idol_id = DB2022_product.idol_id " +
                     "and category = ? and name like ? " +
                     "order by date";
