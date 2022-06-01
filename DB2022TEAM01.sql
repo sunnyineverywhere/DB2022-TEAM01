@@ -70,6 +70,12 @@ create index idx_user_login on db2022team01.db2022_user
 
 # 예시 데이터 삽입 이후 실행 할 것
 # 뷰 생성
+
+create view product_list as
+select id, name, gp, member, category, seller, price, date
+from DB2022_idol, DB2022_product where isSold = false and DB2022_idol.idol_id = DB2022_product.idol_id 
+order by date;
+
 create view idol_list as
 select gp, member from db2022team01.db2022_idol;
 

@@ -61,8 +61,8 @@ public class DB2022TEAM01_IdolList extends JFrame{
 
        Connection conn = getConnection();
 
-        String SQL = "select gp, member\n" +
-                "from DB2022_idol;";
+        String SQL = "select *" +
+                "from idol_list;";
 
         Long userId= loginfunc.getLogInUser();
 
