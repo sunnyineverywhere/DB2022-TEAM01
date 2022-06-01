@@ -63,7 +63,7 @@ public class DB2022TEAM01_ProductDetail {
 
 		Connection conn = getConnection();
 
-		String SQL = "select * from DB2022_idol, DB2022_product where isSold = false and DB2022_idol.idol_id = DB2022_product.idol_id;";
+		String SQL = "select * from DB2022_idol, DB2022_product where isSold = false and DB2022_idol.idol_id = DB2022_product.idol_id order by date;";
 		try{
 			ps = conn.prepareStatement(SQL);
 			rs = ps.executeQuery();

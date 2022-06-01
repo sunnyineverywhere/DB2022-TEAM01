@@ -58,9 +58,10 @@ public class DB2022TEAM01_WishList extends JFrame {
 
         Connection conn = getConnection();
 
-        String SQL = "select id, name, gp, member, category, seller, price\n" +
+        String SQL = "select id, name, gp, member, category, seller, price, date\n" +
                 "from DB2022_product, DB2022_wishlist, DB2022_idol\n" +
-                "where DB2022_wishlist.user_id = ? and DB2022_wishlist.product_id = DB2022_product.id and DB2022_product.idol_id = DB2022_idol.idol_id;\n";
+                "where DB2022_wishlist.user_id = ? and DB2022_wishlist.product_id = DB2022_product.id and DB2022_product.idol_id = DB2022_idol.idol_id " +
+                "order by date;\n";
         try{
             ps = conn.prepareStatement(SQL);
             ps.setLong(1, userId);

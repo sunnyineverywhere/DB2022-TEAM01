@@ -53,7 +53,8 @@ public class DB2022TEAM01_TradeList extends JFrame {
 
         String SQL = "select distinct id, name, user_id, DB2022_product.idol_id, gp, member, price, seller, buyer_id, category\n" +
                 "from DB2022_product, DB2022_trade, DB2022_idol\n" +
-                "where (DB2022_product.user_id = ? or DB2022_trade.buyer_id = ?) and DB2022_idol.idol_id = DB2022_product.idol_id;";
+                "where (DB2022_product.user_id = ? or DB2022_trade.buyer_id = ?) and DB2022_idol.idol_id = DB2022_product.idol_id " +
+                "order by date;";
 
         Long userId= logInFunc.getLogInUser();
 
