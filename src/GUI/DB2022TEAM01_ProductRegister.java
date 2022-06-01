@@ -120,23 +120,26 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
                     Long price = Long.parseLong(price_str);
                     
                 	DB2022TEAM01_ProductDTO dto = new DB2022TEAM01_ProductDTO(userId, productName, price, sellerName, categoryInput, IdolGroup, IdolMember);
-                    new DB2022TEAM01_ProductDAO().productRegister(dto);
-                    
-                    //등록되었습니다 창
-                    JOptionPane.showMessageDialog(DB2022TEAM01_ProductRegister.this, "등록되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
-                    
+                    if(new DB2022TEAM01_ProductDAO().productRegister(dto)==false) {
+                    	JOptionPane.showMessageDialog(DB2022TEAM01_ProductRegister.this, "등록에 실패하였습니다.", "Message", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                    	//등록되었습니다 창
+                        JOptionPane.showMessageDialog(DB2022TEAM01_ProductRegister.this, "등록되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
+                    }                 
+                                        
                     productNameInput.setText(null);
                     IdolGroupInput.setText(null);
                     IdolMemberInput.setText(null);
                     priceInput.setText(null);
-				} catch (NumberFormatException e2) {	//제대로 입력하지 않았을 경우
+				} catch (Exception e2) {	//제대로 입력하지 않았을 경우
 					// TODO: handle exception
-					JOptionPane.showMessageDialog(DB2022TEAM01_ProductRegister.this, "등록에 실패하였습니다. 빈칸을 모두 채우세요.", "Message", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(DB2022TEAM01_ProductRegister.this, "등록에 실패하였습니다.", "Message", JOptionPane.ERROR_MESSAGE);
 					productNameInput.setText(null);
                     IdolGroupInput.setText(null);
                     IdolMemberInput.setText(null);
                     priceInput.setText(null);
-				}
+				} 
+                
                 
                 
                 

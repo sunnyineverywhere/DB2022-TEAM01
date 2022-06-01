@@ -50,6 +50,7 @@ public class DB2022TEAM01_ProductDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return -1l;
         }
 
         return id;
@@ -62,7 +63,7 @@ public class DB2022TEAM01_ProductDAO {
                 "values\n" +
                 "(?, ?, ?, ?, ?, NOW(), ?);";
         Long idolId = FindIdol(dto.getIdolGroup(), dto.getIdolMember());               
-
+        if(idolId==-1) return false;
         System.out.println(dto.getUserId());
 
         try{
