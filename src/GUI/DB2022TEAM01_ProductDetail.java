@@ -39,7 +39,6 @@ public class DB2022TEAM01_ProductDetail {
 	private ResultSet rs;
 
 
-
 	public DB2022TEAM01_ProductDetail() {
 		JFrame frame = new JFrame("상품 상세");
 		Container contentPane = frame.getContentPane();
@@ -155,7 +154,12 @@ public class DB2022TEAM01_ProductDetail {
 				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
 				Long productId = Long.parseLong(idInput.getText());
 				dao.buyProduct(productId);
-				new PopUp2();
+				if(!dao.isOkayBuying(productId)){
+					new PopUp4();
+				}
+				else{
+					new PopUp2();
+				}
 				//여기에 구매 처리하는 코드
 			}
 		});
@@ -231,6 +235,9 @@ class PopUp2 extends JFrame{
 	}
 }
 
+
+
+
 class PopUp3 extends JFrame{
 	public PopUp3() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -249,5 +256,26 @@ class PopUp3 extends JFrame{
 		frame.setLocationRelativeTo(null);	//화면 중앙에 뜸
 		frame.setVisible(true);
 		
+	}
+}
+
+class PopUp4 extends JFrame{
+	public PopUp4() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrame frame = new JFrame("매수 실패");
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel("상품 구입을 실패했습니다", JLabel.CENTER);
+
+		label.setHorizontalAlignment(JLabel.CENTER);
+		label.setFont(label.getFont().deriveFont(15.0f));
+
+		panel.setLayout(new BorderLayout(10, 10));
+		panel.add(label);
+		frame.add(panel);
+
+		frame.setSize(300, 150);
+		frame.setLocationRelativeTo(null);	//화면 중앙에 뜸
+		frame.setVisible(true);
+
 	}
 }

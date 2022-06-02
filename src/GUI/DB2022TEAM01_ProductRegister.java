@@ -104,11 +104,6 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
                 System.out.println(userId);
                 String sellerName = logInFunc.getLogInUserName(userId);
                 System.out.println(sellerName);
-
-
-               // trade에도 등록
-                new DB2022TEAM01_TradeDAO().tradeRegister();
-                System.out.println(sellerName);                
                 
                 try {
                 	// gui에 입력된 값 가져오기
@@ -125,8 +120,10 @@ public class DB2022TEAM01_ProductRegister extends JFrame {
                     } else {
                     	//등록되었습니다 창
                         JOptionPane.showMessageDialog(DB2022TEAM01_ProductRegister.this, "등록되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
-                    }                 
-                                        
+                    }
+
+                    System.out.println(sellerName);
+
                     productNameInput.setText(null);
                     IdolGroupInput.setText(null);
                     IdolMemberInput.setText(null);

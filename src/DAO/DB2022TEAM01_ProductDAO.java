@@ -66,6 +66,8 @@ public class DB2022TEAM01_ProductDAO {
         if(idolId==-1) return false;
         System.out.println(dto.getUserId());
 
+        String SQL2 = "select id from DB2022_product where name = ? and price = ? and seller = ? and category = ? and idol_id = ? and user_id = ?";
+
         try{
             ps = con.prepareStatement(SQL);
             ps.setString(1, dto.getName());
@@ -75,6 +77,25 @@ public class DB2022TEAM01_ProductDAO {
             ps.setLong(5, idolId);
             ps.setLong(6, dto.getUserId());
             ps.executeUpdate();
+
+            ps = con.prepareStatement(SQL2);
+            ps.setString(1, dto.getName());
+            ps.setLong(2, dto.getPrice());
+            ps.setString(3, dto.getSeller());
+            ps.setString(4, dto.getCategory());
+            ps.setLong(5, idolId);
+            ps.setLong(6, dto.getUserId());
+            rs = ps.executeQuery();
+
+            if(rs.next()){
+                Long productId = rs.getLong("id");
+                ps = con.prepareStatement("insert into DB2022_trade(product_id)\n" +
+                        "values\n" +
+                        "(?);");
+                ps.setLong(1, productId);
+                ps.executeUpdate();
+            }
+
             return true;
 
         }catch (Exception e){
@@ -121,11 +142,36 @@ public class DB2022TEAM01_ProductDAO {
         return false;
     }
 
+    // 상품 구매 시 구매자와 판매자가 같은 지 확인
+    public boolean isOkayBuying(Long productId){
+        Long currentUserId = logInFunc.getLogInUser();
+        Long sellerId = Long.valueOf(0);
+        Connection conn = getConnection();
+        String SQL = "select user_id from DB2022_product where id = ?";
+        try{
+            ps = conn.prepareStatement(SQL);
+            ps.setLong(1, productId);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                sellerId = rs.getLong("user_id");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        if(currentUserId.equals(sellerId)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     // 상품 구매
     public boolean buyProduct(Long productId){
         Connection conn = getConnection();
         String SQL = "update DB2022_product set isSold = true where id = ?;";
-        String SQL2 = "update DB2022_trade set buyer_id = ?;";
+        String SQL2 = "update DB2022_trade set buyer_id = ?, buyer_name = ?;";
 
         try{
             conn.setAutoCommit(false);
@@ -135,11 +181,20 @@ public class DB2022TEAM01_ProductDAO {
 
             ps = conn.prepareStatement(SQL2);
             Long userId = logInFunc.getLogInUser();
+            String username = logInFunc.getLogInUserName(userId);
             ps.setLong(1, userId);
-            ps.executeUpdate();
+            ps.setString(2, username);
 
-            conn.commit();
-            return true;
+            if (isOkayBuying(productId)){
+                ps.executeUpdate();
+                conn.commit();
+                return true;
+            }
+            else{
+                System.out.println("등록 불가");
+                return false;
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }
