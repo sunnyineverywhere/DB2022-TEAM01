@@ -43,8 +43,10 @@ create table `DB2022_trade` (
 	`trade_id` bigint auto_increment primary key,
     `product_id` bigint,
     `buyer_id` bigint default null,
+    `buyer_name` varchar(45) default null,
 	foreign key(product_id) references DB2022_product(id),
-    foreign key(buyer_id) references DB2022_user(id)
+    foreign key(buyer_id) references DB2022_user(id),
+    foreign key(buyer_name) references DB2022_user(name)
 );
 
 create table `DB2022_wishlist`(
@@ -70,14 +72,18 @@ create index idx_user_login on db2022team01.db2022_user
 
 # 예시 데이터 삽입 이후 실행 할 것
 # 뷰 생성
+create view idol_list as
+select gp, member from db2022team01.db2022_idol;
+
 
 create view product_list as
 select id, name, gp, member, category, seller, price, date
 from DB2022_idol, DB2022_product where isSold = false and DB2022_idol.idol_id = DB2022_product.idol_id 
 order by date;
 
-create view idol_list as
-select gp, member from db2022team01.db2022_idol;
+create view product_withidol as
+select id, name, price, seller, category, date, DB2022_product.idol_id, gp, member
+from DB2022_product, DB2022_idol where DB2022_idol.idol_id = DB2022_product.idol_id;
 
 
 
@@ -111,4 +117,3 @@ values
 insert into DB2022_trade(product_id)
 values
 (1);
-
