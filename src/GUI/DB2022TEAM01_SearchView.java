@@ -63,20 +63,24 @@ public class DB2022TEAM01_SearchView {
 
 
         try{
-            String SQL = "select id, name, gp, member, category, price from DB2022_product, DB2022_idol \n" +
-                    "where DB2022_product.idol_id = ? and DB2022_idol.idol_id = DB2022_product.idol_id " +
-                    "and category = ? and name like ? " +
+            String SQL = "select id, name, gp, member, category, price, isSold from DB2022_product, (\n" +
+                    "select gp, member from DB2022_idol\n" +
+                    "where idol_id = ?) idol\n" +
+                    "where  DB2022_product.idol_id = ?\n" +
+                    "and category = ? and name like ?\n" +
+                    "and isSold = false\n" +
                     "order by date";
+
 
             ps = conn.prepareStatement(SQL);
             DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
             Long idolId = dao.FindIdol(gp, member);
             ps.setLong(1, idolId);
-
-            ps.setString(2, category);
+            ps.setLong(2, idolId);
+            ps.setString(3, category);
 
             String searchInput = "%" + keyword + "%";
-            ps.setString(3, searchInput);
+            ps.setString(4, searchInput);
 
             rs = ps.executeQuery();
             int row = 1;
