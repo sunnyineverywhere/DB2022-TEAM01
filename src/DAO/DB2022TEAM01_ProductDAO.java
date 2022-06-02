@@ -105,20 +105,30 @@ public class DB2022TEAM01_ProductDAO {
     }
 
     //위시리스트에 상품이 있는지 확인하는 함수
-    // 상품 구매 시 구매자와 판매자가 같은 지 확인
     public boolean isInWishlist(Long productId){
-        Long currentProductId = Long.valueOf(0);
+        Long currentUserId = logInFunc.getLogInUser();
+        Long WishlistProductId = Long.valueOf(0);
+        Long productUserId = Long.valueOf(0);
         Connection conn = getConnection();
-        String SQL = "select product_id from DB2022_wishlist where product_id = ?";
+        String SQL = "select product_id, user_id from DB2022_wishlist where product_id = ?";
         try{
             ps = conn.prepareStatement(SQL);
             ps.setLong(1, productId);
             rs = ps.executeQuery();
             if(rs.next()){
-                return false;
-            }else{
+                WishlistProductId = rs.getLong("product_id");
+                productUserId = rs.getLong("user_id");
+            }
+
+            if(productUserId == currentUserId){
                 return true;
             }
+
+            if(WishlistProductId == productId && productUserId == currentUserId){
+                return true;
+            }
+            return false;
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -170,6 +180,31 @@ public class DB2022TEAM01_ProductDAO {
         return false;
     }
 
+    // 위시리스트 추가 시 구매자와 판매자가 같은 지 확인
+    public boolean isOkayAddWishlist(Long productId){
+        Long currentUserId = logInFunc.getLogInUser();
+        Long sellerId = Long.valueOf(0);
+        Connection conn = getConnection();
+        String SQL = "select user_id from DB2022_product where id = ?";
+        try{
+            ps = conn.prepareStatement(SQL);
+            ps.setLong(1, productId);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                sellerId = rs.getLong("user_id");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        if(currentUserId.equals(sellerId)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     // 상품 구매 시 구매자와 판매자가 같은 지 확인
     public boolean isOkayBuying(Long productId){
         Long currentUserId = logInFunc.getLogInUser();
@@ -216,7 +251,7 @@ public class DB2022TEAM01_ProductDAO {
                 ps.executeUpdate();
                 conn.commit();
                 return true;
-            
+
         }catch (Exception e){
             e.printStackTrace();
         }

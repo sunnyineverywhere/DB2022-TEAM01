@@ -139,13 +139,19 @@ public class DB2022TEAM01_ProductDetail {
 				// TODO Auto-generated method stub
 				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
 				Long productId = Long.parseLong(idInput.getText());
-				if(!dao.isInWishlist(productId)){
-					dao.addWishlist(productId); // 위시리스트에 추가됨
-					new PopUp1();
-				}
-				else{
+
+				if(dao.isInWishlist(productId)){
 					new PopUp5();
 				}
+				else if(!dao.isOkayAddWishlist(productId)){
+					new PopUp5();
+				}
+				else{
+					new PopUp2();
+					dao.addWishlist(productId); // 위시리스트에 추가됨
+				}
+
+
 
 			}
 		});
@@ -159,7 +165,6 @@ public class DB2022TEAM01_ProductDetail {
 				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
 				Long productId = Long.parseLong(idInput.getText());
 				if(!dao.isOkayBuying(productId)){
-
 					new PopUp4();
 				}
 				else{
