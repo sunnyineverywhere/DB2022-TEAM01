@@ -92,10 +92,12 @@ public class DB2022TEAM01_ProductDAO {
         Long userId = logInFunc.getLogInUser();
         System.out.println(userId);
         try{
+            con.setAutoCommit(false);
             ps = con.prepareStatement(SQL);
             ps.setLong(1, userId);
             ps.setLong(2, productId);
             ps.executeUpdate();
+            con.commit();
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -108,9 +110,11 @@ public class DB2022TEAM01_ProductDAO {
         Connection conn = getConnection();
         String SQL = "delete from DB2022_wishlist where product_id = ?;";
         try{
+            conn.setAutoCommit(false);
             ps = conn.prepareStatement(SQL);
             ps.setLong(1, productId);
             ps.executeUpdate();
+            conn.commit();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -124,6 +128,7 @@ public class DB2022TEAM01_ProductDAO {
         String SQL2 = "update DB2022_trade set buyer_id = ?;";
 
         try{
+            conn.setAutoCommit(false);
             ps = conn.prepareStatement(SQL);
             ps.setLong(1, productId);
             ps.executeUpdate();
@@ -133,6 +138,7 @@ public class DB2022TEAM01_ProductDAO {
             ps.setLong(1, userId);
             ps.executeUpdate();
 
+            conn.commit();
             return true;
         }catch (Exception e){
             e.printStackTrace();

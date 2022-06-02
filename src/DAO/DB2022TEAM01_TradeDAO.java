@@ -55,10 +55,11 @@ public class DB2022TEAM01_TradeDAO {
         Long productId = tradeFind();
 
         try{
+            conn.setAutoCommit(false);
             ps = conn.prepareStatement(SQL);
             ps.setLong(1, productId);
             ps.executeUpdate();
-
+            conn.commit();
             return true;
         }catch (Exception e){
             e.printStackTrace();
