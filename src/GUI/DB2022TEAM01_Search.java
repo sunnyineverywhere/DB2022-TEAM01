@@ -100,6 +100,9 @@ public class DB2022TEAM01_Search extends JFrame{
 				String idol_mem = member.getText();
 				String keyword_str = keyword.getText();
 				String category_str = category.getSelectedItem().toString();
+				if(keyword_str == "검색 키워드"){
+					keyword_str = "";
+				}
 				if(idol_group.isBlank() || idol_group.equals(group_info) || idol_mem.isBlank() || idol_mem.equals(mem_info) || keyword_str.equals(key_info)) {
 					JOptionPane.showMessageDialog(DB2022TEAM01_Search.this, "아이돌 그룹과 멤버명을 입력해야 합니다. 키워드가 없다면 빈칸으로 채우세요.", "Message", JOptionPane.ERROR_MESSAGE);
 				}

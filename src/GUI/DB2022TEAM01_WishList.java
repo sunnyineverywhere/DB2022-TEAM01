@@ -166,6 +166,8 @@ public class DB2022TEAM01_WishList extends JFrame {
                 dao.deleteWishList(productId);
                 dao.buyProduct(productId);
                 new PopUp2();
+                dispose();
+                new DB2022TEAM01_WishList();
             }
         });
 

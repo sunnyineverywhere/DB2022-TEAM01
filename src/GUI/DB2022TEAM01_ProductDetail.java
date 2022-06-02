@@ -139,9 +139,14 @@ public class DB2022TEAM01_ProductDetail {
 				// TODO Auto-generated method stub
 				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
 				Long productId = Long.parseLong(idInput.getText());
-				dao.addWishlist(productId);
-				new PopUp1();
-				//여기에 위시리스트에 추가하는 코드
+				if(!dao.isInWishlist(productId)){
+					dao.addWishlist(productId); // 위시리스트에 추가됨
+					new PopUp1();
+				}
+				else{
+					new PopUp5();
+				}
+
 			}
 		});
         
@@ -153,11 +158,12 @@ public class DB2022TEAM01_ProductDetail {
 				// TODO Auto-generated method stub
 				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
 				Long productId = Long.parseLong(idInput.getText());
-				dao.buyProduct(productId);
 				if(!dao.isOkayBuying(productId)){
+
 					new PopUp4();
 				}
 				else{
+					dao.buyProduct(productId);
 					new PopUp2();
 				}
 				//여기에 구매 처리하는 코드
@@ -265,6 +271,27 @@ class PopUp4 extends JFrame{
 		JFrame frame = new JFrame("매수 실패");
 		JPanel panel = new JPanel();
 		JLabel label = new JLabel("상품 구입을 실패했습니다", JLabel.CENTER);
+
+		label.setHorizontalAlignment(JLabel.CENTER);
+		label.setFont(label.getFont().deriveFont(15.0f));
+
+		panel.setLayout(new BorderLayout(10, 10));
+		panel.add(label);
+		frame.add(panel);
+
+		frame.setSize(300, 150);
+		frame.setLocationRelativeTo(null);	//화면 중앙에 뜸
+		frame.setVisible(true);
+
+	}
+}
+
+class PopUp5 extends JFrame{
+	public PopUp5() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrame frame = new JFrame("위시리스트 등록 실패");
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel("위시리스트에 이미 있거나, 자신이 등록한 상품입니다", JLabel.CENTER);
 
 		label.setHorizontalAlignment(JLabel.CENTER);
 		label.setFont(label.getFont().deriveFont(15.0f));

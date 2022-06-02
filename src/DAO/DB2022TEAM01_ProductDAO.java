@@ -104,6 +104,29 @@ public class DB2022TEAM01_ProductDAO {
         return false;
     }
 
+    //위시리스트에 상품이 있는지 확인하는 함수
+    // 상품 구매 시 구매자와 판매자가 같은 지 확인
+    public boolean isInWishlist(Long productId){
+        Long currentProductId = Long.valueOf(0);
+        Connection conn = getConnection();
+        String SQL = "select product_id from DB2022_wishlist where product_id = ?";
+        try{
+            ps = conn.prepareStatement(SQL);
+            ps.setLong(1, productId);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                return false;
+            }else{
+                return true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
     // 위시리스트에 상품을 추가하는 함수
     public boolean addWishlist(Long productId){
         Connection con = getConnection();
@@ -114,12 +137,17 @@ public class DB2022TEAM01_ProductDAO {
         System.out.println(userId);
         try{
             con.setAutoCommit(false);
-            ps = con.prepareStatement(SQL);
-            ps.setLong(1, userId);
-            ps.setLong(2, productId);
-            ps.executeUpdate();
-            con.commit();
-            return true;
+            if(!isInWishlist(productId)){
+                ps = con.prepareStatement(SQL);
+                ps.setLong(1, userId);
+                ps.setLong(2, productId);
+                ps.executeUpdate();
+                con.commit();
+                return true;
+            }
+            else{
+                return false;
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -171,7 +199,7 @@ public class DB2022TEAM01_ProductDAO {
     public boolean buyProduct(Long productId){
         Connection conn = getConnection();
         String SQL = "update DB2022_product set isSold = true where id = ?;";
-        String SQL2 = "update DB2022_trade set buyer_id = ?, buyer_name = ?;";
+        String SQL2 = "update DB2022_trade set buyer_id = ? where product_id = ?;";
 
         try{
             conn.setAutoCommit(false);
@@ -183,18 +211,12 @@ public class DB2022TEAM01_ProductDAO {
             Long userId = logInFunc.getLogInUser();
             String username = logInFunc.getLogInUserName(userId);
             ps.setLong(1, userId);
-            ps.setString(2, username);
+            ps.setLong(2, productId);
 
-            if (isOkayBuying(productId)){
                 ps.executeUpdate();
                 conn.commit();
                 return true;
-            }
-            else{
-                System.out.println("등록 불가");
-                return false;
-            }
-
+            
         }catch (Exception e){
             e.printStackTrace();
         }
