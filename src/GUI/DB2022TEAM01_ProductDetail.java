@@ -62,7 +62,7 @@ public class DB2022TEAM01_ProductDetail {
 
 		Connection conn = getConnection();
 
-		String SQL = "select * from DB2022Team01_product_list;";
+		String SQL = "select * from DB2022Team01_product_list order by date desc;";
 		try{
 			ps = conn.prepareStatement(SQL);
 			rs = ps.executeQuery();
@@ -138,6 +138,7 @@ public class DB2022TEAM01_ProductDetail {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
+				
 				Long productId = Long.parseLong(idInput.getText());
 
 				if(dao.isInWishlist(productId)){	//위시리스트 등록 실패 - 이미 위시리스트에 있는 상품이어서
@@ -146,12 +147,18 @@ public class DB2022TEAM01_ProductDetail {
 				else if(!dao.isOkayAddWishlist(productId)){	//위시리스트 등록 실패 - 구매자와 판매자가 같아서
 					new PopUp5();
 				}
-				else{	//위시리스트 등록 성공
-					new PopUp2();
-					dao.addWishlist(productId); // 위시리스트에 추가됨
+				else{
+					try {
+						dao.addWishlist(productId); // 위시리스트에 추가됨	
+						new PopUp1();
+					} catch (Exception e2) {
+						// TODO: handle exception
+						JOptionPane.showMessageDialog(null, "아이돌 그룹과 멤버명을 입력해야 합니다.", "Message", JOptionPane.ERROR_MESSAGE);
+					}
+					
+					
 				}
-
-
+				
 
 			}
 		});

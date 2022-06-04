@@ -136,7 +136,11 @@ public class DB2022TEAM01_ProductDAO {
         return false;
 
     }
-
+    /*
+    public boolean isInDetail(Long productId) {
+    	
+    }
+	*/
     // 위시리스트에 상품을 추가하는 함수
     public boolean addWishlist(Long productId){
         Connection con = getConnection();
