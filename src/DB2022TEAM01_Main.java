@@ -7,7 +7,7 @@ public class DB2022TEAM01_Main {
 
         DB2022TEAM01_LogInDAO logInFunc = new DB2022TEAM01_LogInDAO();
         logInFunc.Start();
-
+        
         new DB2022TEAM01_LogIn();
     }
 
