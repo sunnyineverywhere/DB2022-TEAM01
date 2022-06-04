@@ -159,7 +159,7 @@ public class DB2022TEAM01_Main extends JFrame{
 		JButton home_btn = new JButton(home);
 		home_btn.setBackground(Color.white);
 		home_btn.setFocusPainted(false);
-		
+		home_btn.setToolTipText("홈");
 		return home_btn;
 	}
 }
