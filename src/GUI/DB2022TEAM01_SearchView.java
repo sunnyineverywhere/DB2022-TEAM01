@@ -148,9 +148,14 @@ public class DB2022TEAM01_SearchView {
 				// TODO Auto-generated method stub
 				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
 				Long productId = Long.parseLong(idInput.getText());
-				dao.addWishlist(productId);
-				new PopUp1();
-				
+				if(!dao.isInDetail(productId)) {	//상품상세에 없는 id입력 -> 추가 실패
+					JOptionPane.showMessageDialog(null, "존재하지 않는 id입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					dao.addWishlist(productId);
+					new PopUp1();
+				}			
+				idInput.setText("");
 			}
 		});
         
@@ -162,8 +167,14 @@ public class DB2022TEAM01_SearchView {
 				// TODO Auto-generated method stub
 				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
 				Long productId = Long.parseLong(idInput.getText());
-				dao.buyProduct(productId);
-				new PopUp2();
+				if(!dao.isInDetail(productId)) {	//상품상세에 없는 id입력 -> 추가 실패
+					JOptionPane.showMessageDialog(null, "존재하지 않는 id입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					dao.buyProduct(productId);
+					new PopUp2();
+				}
+				idInput.setText("");
 			
 			}
 		});

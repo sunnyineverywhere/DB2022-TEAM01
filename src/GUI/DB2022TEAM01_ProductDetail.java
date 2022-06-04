@@ -147,18 +147,14 @@ public class DB2022TEAM01_ProductDetail {
 				else if(!dao.isOkayAddWishlist(productId)){	//위시리스트 등록 실패 - 구매자와 판매자가 같아서
 					new PopUp5();
 				}
-				else{
-					try {
-						dao.addWishlist(productId); // 위시리스트에 추가됨	
-						new PopUp1();
-					} catch (Exception e2) {
-						// TODO: handle exception
-						JOptionPane.showMessageDialog(null, "아이돌 그룹과 멤버명을 입력해야 합니다.", "Message", JOptionPane.ERROR_MESSAGE);
-					}
-					
-					
+				else if (!dao.isInDetail(productId)){	//상품 상세에 없는 id입력 -> 등록 실패
+					JOptionPane.showMessageDialog(null, "존재하지 않는 id입니다.", "Message", JOptionPane.ERROR_MESSAGE);
 				}
-				
+				else{
+					dao.addWishlist(productId); // 위시리스트에 추가됨	
+					new PopUp1();							
+				}
+				idInput.setText("");
 
 			}
 		});
@@ -174,11 +170,14 @@ public class DB2022TEAM01_ProductDetail {
 				if(!dao.isOkayBuying(productId)){	//구입 실패 - 구매자와 판매자가 같아서
 					new PopUp4();
 				}
+				else if(!dao.isInDetail(productId)) {	//상품 상세에 없는 id입력 -> 구입 실패
+					JOptionPane.showMessageDialog(null, "존재하지 않는 id입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+				}
 				else{	//구입 성공
 					dao.buyProduct(productId);
 					new PopUp2();
 				}
-				//여기에 구매 처리하는 코드
+				idInput.setText("");
 			}
 		});
         
