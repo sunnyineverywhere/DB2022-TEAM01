@@ -148,7 +148,14 @@ public class DB2022TEAM01_SearchView {
 				// TODO Auto-generated method stub
 				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
 				Long productId = Long.parseLong(idInput.getText());
-				if(!dao.isInDetail(productId)) {	//상품상세에 없는 id입력 -> 추가 실패
+				
+				if(dao.isInWishlist(productId)){	//위시리스트 등록 실패 - 이미 위시리스트에 있는 상품이어서
+					JOptionPane.showMessageDialog(null, "이미 찜한 상품입니다.", "위시리스트 등록 실패", JOptionPane.ERROR_MESSAGE);
+				}
+				else if(!dao.isOkayAddWishlist(productId)){	//위시리스트 등록 실패 - 구매자와 판매자가 같아서
+					JOptionPane.showMessageDialog(null, "본인이 등록한 상품입니다.", "위시리스트 등록 실패", JOptionPane.ERROR_MESSAGE);
+				}
+				else if(!dao.isInDetail(productId)) {	//상품상세에 없는 id입력 -> 추가 실패
 					JOptionPane.showMessageDialog(null, "존재하지 않는 id입니다.", "Message", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
@@ -167,7 +174,10 @@ public class DB2022TEAM01_SearchView {
 				// TODO Auto-generated method stub
 				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
 				Long productId = Long.parseLong(idInput.getText());
-				if(!dao.isInDetail(productId)) {	//상품상세에 없는 id입력 -> 추가 실패
+				if(!dao.isOkayBuying(productId)){	//구입 실패 - 구매자와 판매자가 같아서
+					new PopUp4();
+				}
+				else if(!dao.isInDetail(productId)) {	//상품상세에 없는 id입력 -> 추가 실패
 					JOptionPane.showMessageDialog(null, "존재하지 않는 id입니다.", "Message", JOptionPane.ERROR_MESSAGE);
 				}
 				else {

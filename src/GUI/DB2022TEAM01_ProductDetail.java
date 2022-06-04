@@ -142,13 +142,13 @@ public class DB2022TEAM01_ProductDetail {
 				Long productId = Long.parseLong(idInput.getText());
 
 				if(dao.isInWishlist(productId)){	//위시리스트 등록 실패 - 이미 위시리스트에 있는 상품이어서
-					new PopUp5();
+					JOptionPane.showMessageDialog(null, "이미 찜한 상품입니다.", "위시리스트 등록 실패", JOptionPane.ERROR_MESSAGE);
 				}
 				else if(!dao.isOkayAddWishlist(productId)){	//위시리스트 등록 실패 - 구매자와 판매자가 같아서
-					new PopUp5();
+					JOptionPane.showMessageDialog(null, "본인이 등록한 상품입니다.", "위시리스트 등록 실패", JOptionPane.ERROR_MESSAGE);
 				}
 				else if (!dao.isInDetail(productId)){	//상품 상세에 없는 id입력 -> 등록 실패
-					JOptionPane.showMessageDialog(null, "존재하지 않는 id입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "존재하지 않는 id입니다.", "위시리스트 등록 실패", JOptionPane.ERROR_MESSAGE);
 				}
 				else{
 					dao.addWishlist(productId); // 위시리스트에 추가됨	
@@ -159,7 +159,7 @@ public class DB2022TEAM01_ProductDetail {
 			}
 		});
         
-        //매수 버튼 눌렀을 때
+        //구매 버튼 눌렀을 때
         bt2.addActionListener(new ActionListener() {
 			
 			@Override
@@ -297,23 +297,3 @@ class PopUp4 extends JFrame{	//구입 실패시 뜨는 팝업창
 	}
 }
 
-class PopUp5 extends JFrame{	//위시리스트 등록 실패시 뜨는 팝업창
-	public PopUp5() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JFrame frame = new JFrame("위시리스트 등록 실패");
-		JPanel panel = new JPanel();
-		JLabel label = new JLabel("위시리스트에 이미 있거나, 자신이 등록한 상품입니다", JLabel.CENTER);
-
-		label.setHorizontalAlignment(JLabel.CENTER);
-		label.setFont(label.getFont().deriveFont(15.0f));
-
-		panel.setLayout(new BorderLayout(10, 10));
-		panel.add(label);
-		frame.add(panel);
-
-		frame.setSize(300, 150);
-		frame.setLocationRelativeTo(null);	//화면 중앙에 뜸
-		frame.setVisible(true);
-
-	}
-}
