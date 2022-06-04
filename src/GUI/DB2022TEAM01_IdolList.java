@@ -62,7 +62,7 @@ public class DB2022TEAM01_IdolList extends JFrame{
        Connection conn = getConnection();
 
         String SQL = "select *" +
-                "from DB2022Team01_idol_list;";
+                "from DB2022_idol_list;";
 
         Long userId= loginfunc.getLogInUser();
 

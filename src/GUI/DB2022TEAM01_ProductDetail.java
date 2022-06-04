@@ -62,7 +62,7 @@ public class DB2022TEAM01_ProductDetail {
 
 		Connection conn = getConnection();
 
-		String SQL = "select * from DB2022Team01_product_list order by date desc;";
+		String SQL = "select * from DB2022_product_list order by date desc;";
 		try{
 			ps = conn.prepareStatement(SQL);
 			rs = ps.executeQuery();

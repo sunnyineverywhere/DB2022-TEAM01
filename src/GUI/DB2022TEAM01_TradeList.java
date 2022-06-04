@@ -52,7 +52,7 @@ public class DB2022TEAM01_TradeList extends JFrame {
        Connection conn = getConnection();
 
         String SQL = "select id, name, idol_id, gp, member, price, seller, category, buyer_id\n" +
-                "from DB2022Team01_product_withidol left outer join DB2022_trade\n" +
+                "from DB2022_product_withidol left outer join DB2022_trade\n" +
                 "on id = DB2022_trade.product_id\n" +
                 "where seller = ? or buyer_id = ?;";
 
