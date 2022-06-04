@@ -13,11 +13,11 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.*;
 import javax.xml.transform.Result;
-
+//상품 상세
 public class DB2022TEAM01_ProductDetail {
-
-	DB2022TEAM01_LogInDAO logInFunc = new DB2022TEAM01_LogInDAO();
-
+	
+	DB2022TEAM01_LogInDAO logInFunc = new DB2022TEAM01_LogInDAO();	//로그인 정보 확인을 위한 객체
+	//데이터 베이스 연결
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost:3306/DB2022Team01";
 	static final String USER = "DB2022Team01";
@@ -55,9 +55,9 @@ public class DB2022TEAM01_ProductDetail {
         label.setFont(font);
         contentPane.add(label);
  
-        
+        //상품 상세 표에 들어갈 attribute
         String col[] = { "상품 ID", "상품명", "아이돌 그룹", "멤버명", "카테고리" , "판매자", "가격", "등록 날짜" };   
-
+        //표
 		DefaultTableModel model = new DefaultTableModel(col, 0);
 
 		Connection conn = getConnection();
@@ -99,18 +99,18 @@ public class DB2022TEAM01_ProductDetail {
 		}
 
         JTable table = new JTable(model);
-        table.setRowHeight(30);
+        table.setRowHeight(30);	//행의 높이
         
         table.setPreferredScrollableViewportSize(new Dimension (900, 650));
         table.setBackground(Color.pink); 
         
-        JButton home = DB2022TEAM01_Main.make_home();
+        JButton home = DB2022TEAM01_Main.make_home();	//홈버튼
         home.setBounds(950, 5, 30, 30);
         contentPane.add(home);
 
-        //찜, 매수하기
+        //찜, 매수하기 기능
         JLabel idInput_label = new JLabel("상품 ID:");
-        JTextField idInput = new JTextField(10);
+        JTextField idInput = new JTextField(10);	//상품 id 입력란
         JButton bt1 = new JButton("찜");
         JButton bt2 = new JButton("구매");
         
@@ -140,13 +140,13 @@ public class DB2022TEAM01_ProductDetail {
 				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
 				Long productId = Long.parseLong(idInput.getText());
 
-				if(dao.isInWishlist(productId)){
+				if(dao.isInWishlist(productId)){	//위시리스트 등록 실패 - 이미 위시리스트에 있는 상품이어서
 					new PopUp5();
 				}
-				else if(!dao.isOkayAddWishlist(productId)){
+				else if(!dao.isOkayAddWishlist(productId)){	//위시리스트 등록 실패 - 구매자와 판매자가 같아서
 					new PopUp5();
 				}
-				else{
+				else{	//위시리스트 등록 성공
 					new PopUp2();
 					dao.addWishlist(productId); // 위시리스트에 추가됨
 				}
@@ -164,10 +164,10 @@ public class DB2022TEAM01_ProductDetail {
 				// TODO Auto-generated method stub
 				DB2022TEAM01_ProductDAO dao = new DB2022TEAM01_ProductDAO();
 				Long productId = Long.parseLong(idInput.getText());
-				if(!dao.isOkayBuying(productId)){
+				if(!dao.isOkayBuying(productId)){	//구입 실패 - 구매자와 판매자가 같아서
 					new PopUp4();
 				}
-				else{
+				else{	//구입 성공
 					dao.buyProduct(productId);
 					new PopUp2();
 				}
@@ -204,7 +204,7 @@ public class DB2022TEAM01_ProductDetail {
 	
 }
 
-class PopUp1 extends JFrame{
+class PopUp1 extends JFrame{	//위시리스트 등록 성공시 팝업창
 	public PopUp1() {	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JFrame frame = new JFrame("찜 완료");
@@ -225,10 +225,10 @@ class PopUp1 extends JFrame{
 	}
 }
 
-class PopUp2 extends JFrame{
+class PopUp2 extends JFrame{	//구입 완료시 뜨는 팝업창	
 	public PopUp2() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JFrame frame = new JFrame("매수 완료");
+		JFrame frame = new JFrame("구입 완료");
 		JPanel panel = new JPanel();
 		JLabel label = new JLabel("상품 구입이 완료되었습니다", JLabel.CENTER);
 		
@@ -249,7 +249,7 @@ class PopUp2 extends JFrame{
 
 
 
-class PopUp3 extends JFrame{
+class PopUp3 extends JFrame{	//'찜 해제' 버튼 클릭했을 때 팝업창
 	public PopUp3() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JFrame frame = new JFrame("찜 해제");
@@ -270,10 +270,10 @@ class PopUp3 extends JFrame{
 	}
 }
 
-class PopUp4 extends JFrame{
+class PopUp4 extends JFrame{	//구입 실패시 뜨는 팝업창
 	public PopUp4() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JFrame frame = new JFrame("매수 실패");
+		JFrame frame = new JFrame("구입 실패");
 		JPanel panel = new JPanel();
 		JLabel label = new JLabel("상품 구입을 실패했습니다", JLabel.CENTER);
 
@@ -291,7 +291,7 @@ class PopUp4 extends JFrame{
 	}
 }
 
-class PopUp5 extends JFrame{
+class PopUp5 extends JFrame{	//위시리스트 등록 실패시 뜨는 팝업창
 	public PopUp5() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JFrame frame = new JFrame("위시리스트 등록 실패");
