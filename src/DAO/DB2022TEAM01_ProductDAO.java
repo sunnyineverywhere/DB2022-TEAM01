@@ -267,9 +267,9 @@ public class DB2022TEAM01_ProductDAO {
             ps.setLong(1, userId);
             ps.setLong(2, productId);
 
-                ps.executeUpdate();
-                conn.commit();
-                return true;
+            ps.executeUpdate();
+            conn.commit();
+            return true;
 
         }catch (Exception e){
             e.printStackTrace();
