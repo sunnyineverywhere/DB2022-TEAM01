@@ -13,7 +13,7 @@ import java.sql.*;
 import java.util.Vector;
 
 public class DB2022TEAM01_SearchView {
-
+	//데이터베이스 연결
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/DB2022Team01";
     static final String USER = "DB2022Team01";
@@ -117,7 +117,7 @@ public class DB2022TEAM01_SearchView {
         table.setPreferredScrollableViewportSize(new Dimension (950, 650));
         table.setBackground(Color.pink);
         
-      //찜, 매수하기
+        //찜, 구매하기 기능
         JLabel idInput_label = new JLabel("상품 ID:");
         JTextField idInput = new JTextField(10);
         JButton bt1 = new JButton("찜");
@@ -140,7 +140,7 @@ public class DB2022TEAM01_SearchView {
         bt1.setBounds(567, 600, 45, 26);
         bt2.setBounds(621, 600, 60, 26);
         
-        //찜 버튼 눌렀을 때
+        //찜 버튼 눌렀을 때 - 위시리스트에 추가
         bt1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -150,11 +150,11 @@ public class DB2022TEAM01_SearchView {
 				Long productId = Long.parseLong(idInput.getText());
 				dao.addWishlist(productId);
 				new PopUp1();
-				//여기에 위시리스트에 추가하는 코드
+				
 			}
 		});
         
-        //매수 버튼 눌렀을 때
+        //구매 버튼 눌렀을 때
         bt2.addActionListener(new ActionListener() {
 			
 			@Override
@@ -164,7 +164,7 @@ public class DB2022TEAM01_SearchView {
 				Long productId = Long.parseLong(idInput.getText());
 				dao.buyProduct(productId);
 				new PopUp2();
-				//여기에 구매 처리하는 코드
+			
 			}
 		});
         

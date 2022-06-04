@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.sql.Date;
 
 public class DB2022TEAM01_ProductDAO {
-
+	//데이터베이스 연결
     DB2022TEAM01_LogInDAO logInFunc = new DB2022TEAM01_LogInDAO();
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -30,7 +30,7 @@ public class DB2022TEAM01_ProductDAO {
         return conn;
     }
 
-    public Long FindIdol(String IdolGroup, String IdolMember) {
+    public Long FindIdol(String IdolGroup, String IdolMember) {	//DB2022_idol에서 IdolGroup, IdolMember가 일치하는 tuple 찾아서 id 리턴
         Connection con = getConnection(); // 연결
 
         // idol db 불러오기
@@ -56,12 +56,12 @@ public class DB2022TEAM01_ProductDAO {
         return id;
     }
 
-    public boolean productRegister(DB2022TEAM01_ProductDTO dto){
+    public boolean productRegister(DB2022TEAM01_ProductDTO dto){	//상품 등록 함수
         Connection con = getConnection();
 
         String SQL = "insert into DB2022_product(name, price, seller, category, idol_id, date, user_id)\n" +
                 "values\n" +
-                "(?, ?, ?, ?, ?, NOW(), ?);";
+                "(?, ?, ?, ?, ?, NOW(), ?);";	//insert문
         Long idolId = FindIdol(dto.getIdolGroup(), dto.getIdolMember());               
         if(idolId==-1) return false;
         System.out.println(dto.getUserId());
@@ -106,9 +106,9 @@ public class DB2022TEAM01_ProductDAO {
 
     //위시리스트에 상품이 있는지 확인하는 함수
     public boolean isInWishlist(Long productId){
-        Long currentUserId = logInFunc.getLogInUser();
-        Long WishlistProductId = Long.valueOf(0);
-        Long productUserId = Long.valueOf(0);
+        Long currentUserId = logInFunc.getLogInUser();	//현재 로그인한 user id
+        Long WishlistProductId = Long.valueOf(0);	//위시리스트에 존재하는 상품id
+        Long productUserId = Long.valueOf(0);	//판매자 id
         Connection conn = getConnection();
         String SQL = "select product_id, user_id from DB2022_wishlist where product_id = ?";
         try{
@@ -120,7 +120,7 @@ public class DB2022TEAM01_ProductDAO {
                 productUserId = rs.getLong("user_id");
             }
 
-            if(productUserId == currentUserId){
+            if(productUserId == currentUserId){	//판매자 id와 현재 user의 id가 같으면
                 return true;
             }
 
