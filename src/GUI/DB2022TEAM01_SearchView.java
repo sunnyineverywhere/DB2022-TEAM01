@@ -63,7 +63,7 @@ public class DB2022TEAM01_SearchView {
 
 
         try{
-            String SQL = "select id, name, gp, member, category, price, isSold from DB2022_product, (\n" +
+            String SQL = "select id, name, gp, member, category, price, isSold from DB2022_product use index(idx_category), (\n" +
                     "select gp, member from DB2022_idol\n" +
                     "where idol_id = ?) idol\n" +
                     "where  DB2022_product.idol_id = ?\n" +
