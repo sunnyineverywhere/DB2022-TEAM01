@@ -62,7 +62,7 @@ public class DB2022TEAM01_ProductDetail {
 
 		Connection conn = getConnection();
 
-		String SQL = "select * from product_list;";
+		String SQL = "select * from DB2022Team01_product_list;";
 		try{
 			ps = conn.prepareStatement(SQL);
 			rs = ps.executeQuery();
