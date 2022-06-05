@@ -21,7 +21,16 @@ create table `DB2022_idol`(
     primary key(idol_id)
 );
 
-# 상품
+# 상품 정보를 저장하는 테이블
+# id는 각 상품이 갖는 고유 식별 번호이다
+# name은 사용자가 작성한 상품의 이름을 저장한다
+# user_id는 상품을 등록한 DB2022_user(user_id)를 저장한다
+# price는 사용자가 입력한 상품의 가격을 저장한다
+# seller는 user_id가 동일한 DB2022_user(name)을 저장한다
+# category는 사용자가 설정한 카테고리 분류명을 저장한다
+# idol_id는 사용자가 입력한 아이돌 그룹명, 아이돌 멤버명과 동일한 idol_id를 저장한다
+# isSold는 상품의 판매 여부를 저장한다. 판매되지 않은 테이블만 DB2022Team01_ProductDetail에서 확인할 수 있다
+# date는 생성 날짜를 저장한다
 create table `DB2022_product`(
 	`id` BIGINT not null auto_increment primary key,
     `name` varchar(45),
@@ -39,6 +48,9 @@ create table `DB2022_product`(
 );
 
 # 유저의 거래 내역
+# 상품이 등록되면 product_id가 trade에 insert된다
+# product_id와 별개로 trade_id가 부여된다
+# buyer_id, buyer_name은 DB2022_user 테이블을 참조하며 상품 구입 시 구매자 id와 name이 입력된다
 create table `DB2022_trade` (
 	`trade_id` bigint auto_increment primary key,
     `product_id` bigint,
