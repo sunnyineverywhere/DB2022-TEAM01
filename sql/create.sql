@@ -61,14 +61,19 @@ create table `DB2022_wishlist`(
 
 
 # 인덱스 생성
-create index idx_idol on db2022team01.db2022_idol
-(gp, member);
 
+#DB2022_idol 테이블에서 IdolGroup, IdolMember가 일치하는 tuple을 찾아서 id를 빠르게 반환하기 위해 이용하는 인덱스
+create index idx_idol on db2022team01.db2022_idol
+(gp, member); 
+
+#로그인한 유저의 name을 가져올 때 이용하는 인덱스
 create index idx_user on db2022team01.db2022_user
 (name, password);
 
+#상품검색에 필요한 db2022_product 테이블을 불러올 때, 상품 종류 선택에 이용하는 인덱스
 create index idx_category on db2022team01.db2022_product
 (category);
 
+#로그인한 유저의 id 번호를 가져올 때 이용하는 인덱스
 create index idx_user_login on db2022team01.db2022_user
 (login);

@@ -310,15 +310,20 @@ insert into DB2022_trade(product_id)
 
 # 예시 데이터 삽입 이후 실행 할 것 -> 아니면 오류가 나기 때문
 # 뷰 생성
+# 등록되어 있는 아이돌 목록을 제공합니다.
+# 사용자에게 DB2022_idol id 속성을 보여줄 필요가 없으므로, 그룹명과 멤버명만 보여주는 뷰 생성
 create view DB2022_idol_list as
 select gp, member from db2022team01.db2022_idol;
 
-
+# 상품상세 확인 시 사용자에게 필요한 정보만을 제공합니다.
+# 판매 완료를 판단하는 isSold는 제외한 테이블을 보여주는 뷰 생성
 create view DB2022_product_list as
 select id, name, gp, member, category, seller, price, date
 from DB2022_idol, DB2022_product where isSold = false and DB2022_idol.idol_id = DB2022_product.idol_id 
 order by date;
 
+# 거래내역에 아이돌이름과 상품을 함께 보여주는 뷰입니다.
+# 거래내역 제공에 관하여 사용자에게 필요한 정보만을 선별할 때, db2022_trade 릴레이션과 대조하는 작업 등에 이용되는 뷰 생성
 create view DB2022_product_withidol as
 select id, name, price, seller, category, date, DB2022_product.idol_id, gp, member
 from DB2022_product, DB2022_idol where DB2022_idol.idol_id = DB2022_product.idol_id;
